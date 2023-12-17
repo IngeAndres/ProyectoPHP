@@ -91,7 +91,6 @@ $listaClientes = $cliente->listarClientes();
                     <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                         <li class="dropdown-header">
                             <h6><?php echo $_SESSION['cliente_nombre']; ?></h6>
-                            <span>Web Designer</span>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -100,7 +99,7 @@ $listaClientes = $cliente->listarClientes();
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-person"></i>
-                                <span>My Profile</span>
+                                <span>Perfil</span>
                             </a>
                         </li>
                         <li>
@@ -110,7 +109,7 @@ $listaClientes = $cliente->listarClientes();
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
                                 <i class="bi bi-gear"></i>
-                                <span>Account Settings</span>
+                                <span>Ajustes</span>
                             </a>
                         </li>
                         <li>
@@ -120,7 +119,7 @@ $listaClientes = $cliente->listarClientes();
                         <li>
                             <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                                 <i class="bi bi-question-circle"></i>
-                                <span>Need Help?</span>
+                                <span>Ayuda</span>
                             </a>
                         </li>
                         <li>
@@ -132,7 +131,7 @@ $listaClientes = $cliente->listarClientes();
                                 <a class="dropdown-item d-flex align-items-center" href="#"
                                     onclick="document.getElementById('logoutForm').submit();">
                                     <i class="bi bi-box-arrow-right"></i>
-                                    <span>Sign Out</span>
+                                    <span>Cerrar sesión</span>
                                 </a>
                                 <input type="hidden" name="cerrar_sesion" value="1">
                             </form>
@@ -174,7 +173,7 @@ $listaClientes = $cliente->listarClientes();
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Datatables</h5>
+                            <h5 class="card-title">Servicios del cliente</h5>
 
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
