@@ -17,10 +17,11 @@ if (isset($_POST['cerrar_sesion'])) {
     exit;
 }
 
-require_once 'clientes.php';
+require_once 'servicios.php';
 
-$cliente = new Cliente();
-$listaClientes = $cliente->listarClientes();
+$razonSocial = $_SESSION['cliente_nombre'];
+$clienteServicio = new servicios();
+$resultado = $clienteServicio->listarServiciosPorCliente($razonSocial);
 ?>
 
 <!DOCTYPE html>
@@ -179,45 +180,34 @@ $listaClientes = $cliente->listarClientes();
                             <table class="table datatable">
                                 <thead>
                                     <tr>
-                                        <th>Código Cliente</th>
-                                        <th>Tipo Documento</th>
-                                        <th>Número Documento</th>
-                                        <th>Apellido Paterno</th>
-                                        <th>Apellido Materno</th>
-                                        <th>Nombre</th>
-                                        <th>Razón Social</th>
-                                        <th>Correo Electrónico</th>
-                                        <th>Sexo</th>
-                                        <th>Celular</th>
-                                        <th>Celular 2</th>
-                                        <th>Celular 3</th>
+                                        <th>Código Servicio</th>
+                                        <th>Ubicación</th>
+                                        <th>Plan</th>
+                                        <th>Mes</th>
+                                        <th>Día de Facturación</th>
+                                        <th>Monto Deuda</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if ($listaClientes) {
-                                        foreach ($listaClientes as $cliente) {
-                                            echo '<tr>';
-                                            echo '<td>' . $cliente['codiClie'] . '</td>';
-                                            echo '<td>' . $cliente['codiTipoDocu'] . '</td>';
-                                            echo '<td>' . $cliente['numeDocu'] . '</td>';
-                                            echo '<td>' . $cliente['appaClie'] . '</td>';
-                                            echo '<td>' . $cliente['apmaClie'] . '</td>';
-                                            echo '<td>' . $cliente['nombClie'] . '</td>';
-                                            echo '<td>' . $cliente['raznSociClie'] . '</td>';
-                                            echo '<td>' . $cliente['mailClie'] . '</td>';
-                                            echo '<td>' . $cliente['sexoClie'] . '</td>';
-                                            echo '<td>' . $cliente['celuClie'] . '</td>';
-                                            echo '<td>' . $cliente['celuClie2'] . '</td>';
-                                            echo '<td>' . $cliente['celuClie3'] . '</td>';
-                                            echo '</tr>';
-                                        }
-                                    } else {
-                                        echo '<tr><td colspan="12" style="text-align: center;">No hay clientes disponibles</td></tr>';
-                                    }
-                                    ?>
+        if ($resultado) {
+            foreach ($resultado as $servicio) {
+                echo '<tr>';
+                echo '<td>' . $servicio['codiServ'] . '</td>';
+                echo '<td>' . $servicio['nombUbig'] . '</td>';
+                echo '<td>' . $servicio['nombPlan'] . '</td>';
+                echo '<td>' . $servicio['nombMes'] . '</td>';
+                echo '<td>' . $servicio['diaFact'] . '</td>';
+                echo '<td>' . $servicio['montDeud'] . '</td>';
+                echo '</tr>';
+            }
+        } else {
+            echo '<tr><td colspan="6" style="text-align: center;">No hay servicios disponibles para este cliente</td></tr>';
+        }
+        ?>
                                 </tbody>
                             </table>
+
                             <!-- End Table with stripped rows -->
 
                         </div>
