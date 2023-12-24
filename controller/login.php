@@ -1,23 +1,24 @@
 <?php
-require_once 'conexion.php';
+require_once 'config/conexion.php';
 require_once 'jwtoken.php';
 
-class Login {
+class login
+{
 
-    
-    private $db;
+    private $conn;
     private $jwt;
 
-    public function __construct() {
-        $this->db = Conexion::getInstance();
+    public function __construct()
+    {
+        $this->conn = Conexion::getInstance()->getConnection();
         $this->jwt = new JWToken();
     }
 
-    public function iniciarSesion($numeDocu, $passClie) {
-        $conn = $this->db->getConnection();
+    public function iniciarSesion($numeDocu, $passClie)
+    {
 
         $query = "SELECT * FROM cliente WHERE numeDocu = ? AND passClie = ?";
-        $stmt = $conn->prepare($query);
+        $stmt = $this->conn->prepare($query);
 
         $stmt->bind_param("ss", $numeDocu, $passClie);
 
@@ -45,4 +46,3 @@ class Login {
         }
     }
 }
-?>

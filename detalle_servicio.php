@@ -19,9 +19,11 @@ if (isset($_POST['cerrar_sesion'])) {
 
 require_once 'controller/servicio.php';
 
-$clienteId = $_SESSION['cliente_id'];
-$servicio = new servicio();
-$resultado = $servicio->listarServiciosPorCliente($clienteId);
+$codiServ = isset($_GET['codiServ']) ? $_GET['codiServ'] : null;
+
+$razonSocial = $_SESSION['cliente_nombre'];
+$clienteServicio = new servicio();
+$resultado = $clienteServicio->listarHistorialPago($codiServ);
 ?>
 
 <!DOCTYPE html>
@@ -29,11 +31,11 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
     <title>Servicios</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
 
     <!-- Favicons -->
     <link rel="icon" href="https://www.econocable.com/wp-content/uploads/2022/01/cropped-logo-500x500-1-32x32.png">
@@ -44,18 +46,17 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
-    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
-    <link rel="stylesheet" href="assets/vendor/boxicons/css/boxicons.min.css">
-    <link rel="stylesheet" href="assets/vendor/quill/quill.snow.css">
-    <link rel="stylesheet" href="assets/vendor/quill/quill.bubble.css">
-    <link rel="stylesheet" href="assets/vendor/remixicon/remixicon.css">
-    <link rel="stylesheet" href="assets/vendor/simple-datatables/style.css">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/css/style.css" rel="stylesheet">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
@@ -65,6 +66,7 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
     <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
@@ -85,8 +87,8 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="principal.php" class="logo d-flex align-items-center justify-content-center">
-                <img src="assets/img/logo-econocable-1.png" alt="Logo" class="img-fluid" style="max-width: 200px; max-height: 100px;">
+            <a href="index.html" class="logo d-flex align-items-center">
+                <img src="assets/img/logo-econocable-1.png" alt="Logo" style="width: 100px; height: auto;">
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -165,7 +167,7 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="principal.php">
-                    <i class="bi bi-briefcase"></i>
+                    <i class="bi bi-grid"></i>
                     <span>Servicios</span>
                 </a>
             </li><!-- End Dashboard Nav -->
@@ -173,52 +175,69 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
 
     </aside><!-- End Sidebar-->
 
-    <!-- Main Content Section -->
     <main id="main" class="main">
-
-        <!-- Servicios Section -->
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- Card and Table Section -->
+
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Listado de Servicios</h5>
+                            <h3 class="card-title">Historial de Pago</h3>
+                            <?php
+                            if ($resultado) {
+                                echo '<p><strong>Código:</strong> ' . $resultado[0]['codiServ'] . '</p>';
+                                echo '<p><strong>Ciudad:</strong> ' . $resultado[0]['nombUbig'] . '</p>';
+                                echo '<p><strong>Nombre:</strong> ' . $resultado[0]['raznSociClie'] . '</p>';
+                                echo '<p><strong>Dirección:</strong> ' . $resultado[0]['direServ'] . '</p>';
+                            }
+                            ?>
 
                             <!-- Table with stripped rows -->
-                            <table id="tablaServicios" class="table table-hover table-bordered">
-                                <!-- Table Header -->
+                            <table id="tablaHistorialPago" class="table table-hover table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: center;">Código</th>
-                                        <th style="text-align: center;">Ciudad</th>
-                                        <th style="text-align: center;">Plan</th>
-                                        <th style="text-align: center;">Monto</th>
-                                        <th style="text-align: center;">Día Facturación</th>
-                                        <th style="text-align: center;">Detalles</th>
+                                        <th style="text-align: center;">N° Recibo</th>
+                                        <th style="text-align: center;">Mes</th>
+                                        <th style="text-align: center;">Pagado</th>
+                                        <th style="text-align: center;">Total</th>
+                                        <th style="text-align: center;">Estado</th>
+                                        <th style="text-align: center;">Boleta</th>
                                     </tr>
                                 </thead>
-                                <!-- Table Body -->
-                                <tbody>
-                                    <!-- PHP Loop to Populate Table Rows -->
+                                <tbody id=" historialPago">
                                     <?php
                                     if ($resultado) {
-                                        foreach ($resultado as $servicio) {
+                                        foreach ($resultado as $historialPago) {
                                             echo '<tr>';
-                                            echo '<td style="text-align: center;">' . $servicio['codiServ'] . '</td>';
-                                            echo '<td style="text-align: center;">' . $servicio['nombUbig'] . '</td>';
-                                            echo '<td style="text-align: center;">' . $servicio['nombPlan'] . '</td>';
-                                            echo '<td style="text-align: center;">' . 'S/.' . number_format($servicio['montPlan'], 2) . '</td>';
-                                            echo '<td style="text-align: center;">' . $servicio['diaFact'] . '</td>';
+                                            echo '<td style="text-align: center;">' . $historialPago['numeReci'] . '</td>';
+                                            echo '<td style="text-align: center;">' . $historialPago['nombMes'] . '</td>';
+                                            echo '<td style="text-align: center;">' . date('d/m/Y', strtotime($historialPago['fechRegiAlta'])) . '</td>';
+                                            echo '<td style="text-align: center;">' . 'S/.' . number_format($historialPago['montAbon'], 2) . '</td>';
+                                            echo '<td style="text-align: center;">';
+                                            switch ($historialPago['estdConc']) {
+                                                case 'P':
+                                                    echo '<span class="badge badge-success">Pagado</span>';
+                                                    break;
+                                                case 'D':
+                                                    echo '<span class="badge badge-warning">No pagado</span>';
+                                                    break;
+                                                case 'A':
+                                                    echo '<span class="badge badge-danger">Anulado</span>';
+                                                    break;
+                                                default:
+                                                    echo '<span class="badge badge-secondary">Desconocido</span>';
+                                                    break;
+                                            }
+                                            echo '</td>';
                                             echo '<td align="center">
-                                                    <button type="button" class="btn btn-warning btn-sm text-white" data-codiserv="' . $servicio['codiServ'] . '">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                    <button type="button" class="btn btn-info btn-sm text-white">
+                                                        <i class="fas fa-file-pdf"></i>
                                                     </button>
                                                 </td>';
                                             echo '</tr>';
                                         }
                                     } else {
-                                        echo '<tr><td colspan="6" style="text-align: center;">No hay servicios disponibles para este cliente</td></tr>';
+                                        echo '<tr><td colspan="9" style="text-align: center;">No hay historial de pago disponible para este servicio</td></tr>';
                                     }
                                     ?>
                                 </tbody>
@@ -227,11 +246,26 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
 
                         </div>
                     </div>
-                    <!-- End Card and Table Section -->
+
                 </div>
             </div>
         </section>
-    </main>
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+        </div>
+        <div class="credits">
+            <!-- All the links in the footer should remain intact. -->
+            <!-- You can delete the links only if you purchased the pro version. -->
+            <!-- Licensing information: https://bootstrapmade.com/license/ -->
+            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+    </footer><!-- End Footer -->
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -247,7 +281,7 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="view/js/servicio.js"></script>
+    <script src="view/js/detalle_servicio.js"></script>
 </body>
 
 </html>
