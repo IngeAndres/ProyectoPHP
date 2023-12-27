@@ -32,12 +32,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="icon" href="https://www.econocable.com/wp-content/uploads/2022/01/cropped-logo-500x500-1-32x32.png">
     <link rel="apple-touch-icon" href="https://www.econocable.com/wp-content/uploads/2022/01/cropped-logo-500x500-1-180x180.png">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
@@ -99,12 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 p-0">
-                <img src="assets/img/22257668.jpeg" alt="Fondo" class="img-fluid w-100 h-100">
-                <div class="contact-info">
+                <img src="assets/img/sergio-zhukov-ae__8IOF0Cs-unsplash.jpg" alt="Fondo" class="img-fluid w-100 h-100">
+                <!--<div class="contact-info">
                     <h2>Contacto</h2>
                     <p>Llámanos (01) 641 8000</p>
                     <p>ventasdigitales@econocable.com</p>
-                </div>
+                </div>-->
             </div>
             <div class="col-md-6 d-flex align-items-center justify-content-center">
                 <div class="container">
@@ -137,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                             <i class="fas fa-id-card"></i>
                                                         </span>
                                                         <input type="text" class="form-control" id="numeDocu" name="numeDocu" required>
-                                                        <div class="invalid-feedback"></div>
+                                                        <div class="invalid-feedback">Por favor ingrese su N° de documento</div>
                                                     </div>
                                                 </div>
 
@@ -148,7 +157,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                             <i class="fas fa-key"></i>
                                                         </span>
                                                         <input type="password" class="form-control" id="passClie" name="passClie" required>
-                                                        <div class="invalid-feedback"></div>
+                                                        <div class="invalid-feedback">Por favor ingrese su contraseña</div>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -193,6 +202,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
     <script src="assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="assets/js/main.js"></script>
 </body>
 
 </html>

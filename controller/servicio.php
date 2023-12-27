@@ -1,5 +1,5 @@
 <?php
-require_once 'config/conexion.php';
+require_once __DIR__ . '/../config/conexion.php';
 
 class servicio
 {
@@ -52,5 +52,24 @@ class servicio
         $stmt->close();
 
         return $data;
+    }
+
+    public function verificarEstadoCuenta($codiServ)
+    {
+        $stmt = $this->conn->prepare("CALL sp_verificarEstadoCuenta(?)");
+        $stmt->bind_param("s", $codiServ);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if (!$result) {
+            die("Error en la consulta: " . $this->conn->error);
+        }
+
+        $rowCount = $result->num_rows;
+
+        $stmt->close();
+
+        return $rowCount === 0;
     }
 }

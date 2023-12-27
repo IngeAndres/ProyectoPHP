@@ -16,12 +16,6 @@ if (isset($_POST['cerrar_sesion'])) {
     header('Location: index.php');
     exit;
 }
-
-require_once 'controller/servicio.php';
-
-$clienteId = $_SESSION['cliente_id'];
-$servicio = new servicio();
-$resultado = $servicio->listarServiciosPorCliente($clienteId);
 ?>
 
 <!DOCTYPE html>
@@ -58,13 +52,12 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
     <link href="https://cdn.datatables.net/1.13.8/css/dataTables.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.bootstrap5.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
@@ -176,54 +169,33 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
     <!-- Main Content Section -->
     <main id="main" class="main">
 
+        <!-- Estado de la cuenta Section -->
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Card Section -->
+                    <div id="estadoCuentaCard" class="card border-primary mb-3">
+                        <div class="card-header text-primary"></div>
+                        <div class="card-body text-primary">
+                            <h5 class="card-title" id="mensajeEstado">Cargando...</h5>
+                        </div>
+                    </div>
+                    <!-- End Card Section -->
+                </div>
+            </div>
+        </section>
+
         <!-- Servicios Section -->
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
                     <!-- Card and Table Section -->
-                    <div class="card">
+                    <div class="card border-primary mb-3 border-info">
                         <div class="card-body">
                             <h5 class="card-title">Listado de Servicios</h5>
 
-                            <!-- Table with stripped rows -->
-                            <table id="tablaServicios" class="table table-hover table-bordered">
-                                <!-- Table Header -->
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center;">Código</th>
-                                        <th style="text-align: center;">Ciudad</th>
-                                        <th style="text-align: center;">Plan</th>
-                                        <th style="text-align: center;">Monto</th>
-                                        <th style="text-align: center;">Día Facturación</th>
-                                        <th style="text-align: center;">Detalles</th>
-                                    </tr>
-                                </thead>
-                                <!-- Table Body -->
-                                <tbody>
-                                    <!-- PHP Loop to Populate Table Rows -->
-                                    <?php
-                                    if ($resultado) {
-                                        foreach ($resultado as $servicio) {
-                                            echo '<tr>';
-                                            echo '<td style="text-align: center;">' . $servicio['codiServ'] . '</td>';
-                                            echo '<td style="text-align: center;">' . $servicio['nombUbig'] . '</td>';
-                                            echo '<td style="text-align: center;">' . $servicio['nombPlan'] . '</td>';
-                                            echo '<td style="text-align: center;">' . 'S/.' . number_format($servicio['montPlan'], 2) . '</td>';
-                                            echo '<td style="text-align: center;">' . $servicio['diaFact'] . '</td>';
-                                            echo '<td align="center">
-                                                    <button type="button" class="btn btn-warning btn-sm text-white" data-codiserv="' . $servicio['codiServ'] . '">
-                                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                                    </button>
-                                                </td>';
-                                            echo '</tr>';
-                                        }
-                                    } else {
-                                        echo '<tr><td colspan="6" style="text-align: center;">No hay servicios disponibles para este cliente</td></tr>';
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
+                            <div id="serviciosContainer">
+                            </div>
 
                         </div>
                     </div>
@@ -233,7 +205,10 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
         </section>
     </main>
 
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+
 
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -245,9 +220,13 @@ $resultado = $servicio->listarServiciosPorCliente($clienteId);
     <script src="assets/vendor/tinymce/tinymce.min.js"></script>
     <script src="assets/vendor/php-email-form/validate.js"></script>
 
+
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="view/js/servicio.js"></script>
+
+
+
 </body>
 
 </html>

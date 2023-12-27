@@ -1,10 +1,10 @@
 {
     "processing": "Procesando...",
     "lengthMenu": "_MENU_",
-    "zeroRecords": "No se encontraron servicios",
+    "zeroRecords": "No se encontraron registros",
     "emptyTable": "Ningún dato disponible en esta tabla",
-    "infoEmpty": "Mostrando servicios del 0 al 0 de un total de 0",
-    "infoFiltered": "(filtrado de un total de _MAX_ servicios)",
+    "infoEmpty": "Mostrando registros del 0 al 0 de un total de 0",
+    "infoFiltered": "(filtrado de un total de _MAX_ registros)",
     "search": "Buscar:",
     "loadingRecords": "Cargando...",
     "paginate": {
@@ -210,7 +210,7 @@
             "info": "Los elementos seleccionados contienen diferentes valores para este registro. Para editar y establecer todos los elementos de este registro con el mismo valor, haga clic o pulse aquí, de lo contrario conservarán sus valores individuales."
         }
     },
-    "info": "Mostrando _START_ a _END_ de _TOTAL_ servicios",
+    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
     "stateRestore": {
         "creationModal": {
             "button": "Crear",

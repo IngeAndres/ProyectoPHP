@@ -16,14 +16,6 @@ if (isset($_POST['cerrar_sesion'])) {
     header('Location: index.php');
     exit;
 }
-
-require_once 'controller/servicio.php';
-
-$codiServ = isset($_GET['codiServ']) ? $_GET['codiServ'] : null;
-
-$razonSocial = $_SESSION['cliente_nombre'];
-$clienteServicio = new servicio();
-$resultado = $clienteServicio->listarHistorialPago($codiServ);
 ?>
 
 <!DOCTYPE html>
@@ -79,6 +71,7 @@ $resultado = $clienteServicio->listarHistorialPago($codiServ);
     <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 </head>
 
 <body>
@@ -87,8 +80,8 @@ $resultado = $clienteServicio->listarHistorialPago($codiServ);
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <div class="d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center">
-                <img src="assets/img/logo-econocable-1.png" alt="Logo" style="width: 100px; height: auto;">
+            <a href="principal.php" class="logo d-flex align-items-center justify-content-center">
+                <img src="assets/img/logo-econocable-1.png" alt="Logo" class="img-fluid" style="max-width: 200px; max-height: 100px;">
             </a>
             <i class="bi bi-list toggle-sidebar-btn"></i>
         </div><!-- End Logo -->
@@ -176,21 +169,28 @@ $resultado = $clienteServicio->listarHistorialPago($codiServ);
     </aside><!-- End Sidebar-->
 
     <main id="main" class="main">
+
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Card and Table Section -->
+                    <div class="card">
+                        <div id="informacionServicio" class="card-body">
+                            <!-- Aquí se mostrará la información del servicio -->
+                        </div>
+                    </div>
+                    <!-- End Card and Table Section -->
+                </div>
+            </div>
+        </section>
+
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
 
                     <div class="card">
                         <div class="card-body">
-                            <h3 class="card-title">Historial de Pago</h3>
-                            <?php
-                            if ($resultado) {
-                                echo '<p><strong>Código:</strong> ' . $resultado[0]['codiServ'] . '</p>';
-                                echo '<p><strong>Ciudad:</strong> ' . $resultado[0]['nombUbig'] . '</p>';
-                                echo '<p><strong>Nombre:</strong> ' . $resultado[0]['raznSociClie'] . '</p>';
-                                echo '<p><strong>Dirección:</strong> ' . $resultado[0]['direServ'] . '</p>';
-                            }
-                            ?>
+                            <h5 class="card-title">Historial de Pago</h5>
 
                             <!-- Table with stripped rows -->
                             <table id="tablaHistorialPago" class="table table-hover table-bordered">
@@ -198,6 +198,7 @@ $resultado = $clienteServicio->listarHistorialPago($codiServ);
                                     <tr>
                                         <th style="text-align: center;">N° Recibo</th>
                                         <th style="text-align: center;">Mes</th>
+                                        <th style="text-align: center;">Emisión</th>
                                         <th style="text-align: center;">Pagado</th>
                                         <th style="text-align: center;">Total</th>
                                         <th style="text-align: center;">Estado</th>
@@ -205,41 +206,6 @@ $resultado = $clienteServicio->listarHistorialPago($codiServ);
                                     </tr>
                                 </thead>
                                 <tbody id=" historialPago">
-                                    <?php
-                                    if ($resultado) {
-                                        foreach ($resultado as $historialPago) {
-                                            echo '<tr>';
-                                            echo '<td style="text-align: center;">' . $historialPago['numeReci'] . '</td>';
-                                            echo '<td style="text-align: center;">' . $historialPago['nombMes'] . '</td>';
-                                            echo '<td style="text-align: center;">' . date('d/m/Y', strtotime($historialPago['fechRegiAlta'])) . '</td>';
-                                            echo '<td style="text-align: center;">' . 'S/.' . number_format($historialPago['montAbon'], 2) . '</td>';
-                                            echo '<td style="text-align: center;">';
-                                            switch ($historialPago['estdConc']) {
-                                                case 'P':
-                                                    echo '<span class="badge badge-success">Pagado</span>';
-                                                    break;
-                                                case 'D':
-                                                    echo '<span class="badge badge-warning">No pagado</span>';
-                                                    break;
-                                                case 'A':
-                                                    echo '<span class="badge badge-danger">Anulado</span>';
-                                                    break;
-                                                default:
-                                                    echo '<span class="badge badge-secondary">Desconocido</span>';
-                                                    break;
-                                            }
-                                            echo '</td>';
-                                            echo '<td align="center">
-                                                    <button type="button" class="btn btn-info btn-sm text-white">
-                                                        <i class="fas fa-file-pdf"></i>
-                                                    </button>
-                                                </td>';
-                                            echo '</tr>';
-                                        }
-                                    } else {
-                                        echo '<tr><td colspan="9" style="text-align: center;">No hay historial de pago disponible para este servicio</td></tr>';
-                                    }
-                                    ?>
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
