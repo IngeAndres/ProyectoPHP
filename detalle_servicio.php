@@ -190,26 +190,9 @@ if (isset($_POST['cerrar_sesion'])) {
 
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title">Historial de Pago</h5>
-
-                            <!-- Table with stripped rows -->
-                            <table id="tablaHistorialPago" class="table table-hover table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: center;">N° Recibo</th>
-                                        <th style="text-align: center;">Mes</th>
-                                        <th style="text-align: center;">Emisión</th>
-                                        <th style="text-align: center;">Pagado</th>
-                                        <th style="text-align: center;">Total</th>
-                                        <th style="text-align: center;">Estado</th>
-                                        <th style="text-align: center;">Boleta</th>
-                                    </tr>
-                                </thead>
-                                <tbody id=" historialPago">
-                                </tbody>
-                            </table>
-                            <!-- End Table with stripped rows -->
-
+                            <h5 class="card-title">Comprobantes</h5>
+                            <div id="historialPagoContainer">
+                            </div>
                         </div>
                     </div>
 
