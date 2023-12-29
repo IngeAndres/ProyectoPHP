@@ -71,7 +71,7 @@ $(document).ready(function () {
       data: data, // Asignar los datos al cuerpo de la tabla
       columns: [
         {
-          data: "numeReci",
+          data: "codiReci",
           className: "text-center",
           render: function (data) {
             return data !== null ? data : "-";
@@ -108,16 +108,25 @@ $(document).ready(function () {
         },
         {
           data: null,
-          render: function () {
-            return '<button type="button" class="btn btn-info btn-sm text-white"><i class="fas fa-file-pdf"></i></button>';
+          render: function (data, type, row) {
+            return '<button type="button" class="btn btn-info btn-sm text-white" data-codireci="' + row.codiReci + '"><i class="fas fa-file-pdf"></i></button>';
           },
           className: "text-center",
-        },
+        }
+        
       ],
     });
     // Mostrar la información del servicio
     mostrarInformacionServicio(data);
   }
+
+  // Agregar evento click al botón de PDF
+  $("#tablaHistorialPago").on("click", ".btn-info", function () {
+    var codiReci = $(this).data("codireci");
+    console.log(codiReci);
+    window.open('../factura/generaFactura.php?codiReci=' + codiReci, '_blank');
+  });
+
 
   function obtenerParametroUrl(nombreParametro) {
     var urlParams = new URLSearchParams(window.location.search);
