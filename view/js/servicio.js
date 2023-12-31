@@ -5,6 +5,7 @@ $(document).ready(function () {
     type: "GET",
     dataType: "json",
     success: function (data) {
+      console.log(data);
       // Manejar los datos recibidos y mostrarlos en el contenedor
       mostrarServicios(data);
 

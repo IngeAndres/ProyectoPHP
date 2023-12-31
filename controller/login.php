@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/conexion.php';
 require_once __DIR__ . '/jwtoken.php';
+require_once __DIR__ . '/../config/config.php';
 
 class login
 {
@@ -11,7 +12,7 @@ class login
     public function __construct()
     {
         $this->conn = conexion::getInstance()->getConnection();
-        $this->jwt = new jwtoken();
+        $this->jwt = new jwtoken(SECRET_KEY);
     }
 
     public function iniciarSesion($numeDocu, $passClie)
@@ -33,9 +34,10 @@ class login
 
             $_SESSION['cliente_logueado'] = true;
             $_SESSION['cliente_id'] = $cliente['codiClie'];
+            $_SESSION['cliente_docu'] = $cliente['numeDocu'];
             $_SESSION['cliente_nombre'] = $cliente['raznSociClie'];
 
-            $token = $this->jwt->generarToken($cliente['numeDocu']);
+            $token = $this->jwt->generarToken($cliente['codiClie'], $cliente['numeDocu']);
             $_SESSION['cliente_token'] = $token;
 
             $stmt->close();
