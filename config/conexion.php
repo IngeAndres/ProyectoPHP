@@ -1,7 +1,7 @@
 <?php
 require_once('config.php');
 
-class Conexion
+class conexion
 {
     private static $instance;
     private $conn;
@@ -29,4 +29,3 @@ class Conexion
         return $this->conn;
     }
 }
-?>

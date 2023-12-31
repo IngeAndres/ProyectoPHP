@@ -1,5 +1,5 @@
 <?php
-require_once '../servicio.php';
+require_once('../servicio.php');
 
 if (isset($_POST['codiServ'])) {
     $codiServ = $_POST['codiServ'];

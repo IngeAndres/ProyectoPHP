@@ -1,6 +1,6 @@
 <?php
-require_once 'config/conexion.php';
-require_once 'jwtoken.php';
+require_once __DIR__ . '/../config/conexion.php';
+require_once __DIR__ . '/jwtoken.php';
 
 class login
 {
@@ -10,8 +10,8 @@ class login
 
     public function __construct()
     {
-        $this->conn = Conexion::getInstance()->getConnection();
-        $this->jwt = new JWToken();
+        $this->conn = conexion::getInstance()->getConnection();
+        $this->jwt = new jwtoken();
     }
 
     public function iniciarSesion($numeDocu, $passClie)

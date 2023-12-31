@@ -1,6 +1,7 @@
 {
     "require": {
         "firebase/php-jwt": "^6.10",
-        "dompdf/dompdf": "^2.0"
+        "dompdf/dompdf": "^2.0",
+        "paragonie/sodium_compat": "^1.20"
     }
 }

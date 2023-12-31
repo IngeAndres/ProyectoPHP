@@ -1,5 +1,5 @@
 <?php
-require_once 'controller/login.php';
+require_once('controller/login.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numeDocu = $_POST['numeDocu'];
@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($login->iniciarSesion($numeDocu, $passClie)) {
         $token = $_SESSION['cliente_token'];
-        setcookie('cliente_token', $token, time() + 86400, '/');
+        setcookie('cliente_token', $token, time() + 3600, '/');
         header("Location: principal.php");
         exit();
     } else {

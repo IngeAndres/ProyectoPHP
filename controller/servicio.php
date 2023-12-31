@@ -10,10 +10,10 @@ class servicio
         $this->conn = Conexion::getInstance()->getConnection();
     }
 
-    public function listarServiciosPorCliente($razonSocial)
+    public function listarServiciosPorCliente($codiClie)
     {
-        $stmt = $this->conn->prepare("CALL sp_ListarServicios(?)");
-        $stmt->bind_param("s", $razonSocial);
+        $stmt = $this->conn->prepare("CALL sp_listar_servicios(?)");
+        $stmt->bind_param("s", $codiClie);
 
         $stmt->execute();
         $result = $stmt->get_result();
@@ -34,7 +34,7 @@ class servicio
 
     public function listarHistorialPago($codiServ)
     {
-        $stmt = $this->conn->prepare("CALL sp_ListarHistorialPago(?)");
+        $stmt = $this->conn->prepare("CALL sp_listar_historial_pagos(?)");
         $stmt->bind_param("s", $codiServ);
 
         $stmt->execute();
@@ -56,7 +56,7 @@ class servicio
 
     public function verificarEstadoCuenta($codiServ)
     {
-        $stmt = $this->conn->prepare("CALL sp_verificarEstadoCuenta(?)");
+        $stmt = $this->conn->prepare("CALL sp_verificar_estado_cuenta(?)");
         $stmt->bind_param("s", $codiServ);
 
         $stmt->execute();
