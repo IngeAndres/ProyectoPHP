@@ -1,6 +1,6 @@
 <?php
-require_once('../servicio.php');
-require_once('../jwtoken.php');
+require_once('../ServicioController.php');
+require_once('../Token.php');
 require_once('../../config/config.php');
 
 session_start();
@@ -13,7 +13,7 @@ if (!isset($_COOKIE['cliente_token'])) {
 
 $token = $_COOKIE['cliente_token'];
 
-$jwt = new jwtoken(SECRET_KEY);
+$jwt = new Token(SECRET_KEY);
 
 $userData = [
     'codiClie' => $_SESSION['cliente_id'],
@@ -23,16 +23,12 @@ $userData = [
 $decodedToken = $jwt->verificarToken($token, $userData);
 
 if ($decodedToken) {
-    if (isset($_POST['codiServ'])) {
-        $codiServ = $_POST['codiServ'];
+    $clienteId = $_SESSION['cliente_id'];
+    $servicio = new ServicioController();
+    $resultado = $servicio->listarServiciosPorCliente($clienteId);
 
-        $clienteServicio = new servicio();
-        $resultado = $clienteServicio->verificarEstadoCuenta($codiServ);
-
-        // Devolver resultados en formato JSON
-        header('Content-Type: application/json');
-        echo json_encode($resultado);
-    }
+    header('Content-Type: application/json');
+    echo json_encode($resultado);
 } else {
     http_response_code(401);
     echo json_encode(array("message" => "Token de autorización inválido."));

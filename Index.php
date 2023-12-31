@@ -1,10 +1,10 @@
 <?php
-require_once('controller/login.php');
+require_once 'controller/ClienteController.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $numeDocu = $_POST['numeDocu'];
     $passClie = hash('sha256', $_POST['passClie']);
-    $login = new login();
+    $login = new ClienteController();
 
     if ($login->iniciarSesion($numeDocu, $passClie)) {
         $token = $_SESSION['cliente_token'];

@@ -1,7 +1,7 @@
 <?php
-require_once('../servicio.php');
-require_once('../jwtoken.php');
-require_once('../../config/config.php');
+require_once '../../config/config.php';
+require_once '../ServicioController.php';
+require_once '../Token.php';
 
 session_start();
 
@@ -13,7 +13,7 @@ if (!isset($_COOKIE['cliente_token'])) {
 
 $token = $_COOKIE['cliente_token'];
 
-$jwt = new jwtoken(SECRET_KEY);
+$jwt = new Token(SECRET_KEY);
 
 $userData = [
     'codiClie' => $_SESSION['cliente_id'],
@@ -26,7 +26,7 @@ if ($decodedToken) {
     if (isset($_GET['codiServ'])) {
         $codiServ = $_GET['codiServ'];
 
-        $clienteServicio = new servicio();
+        $clienteServicio = new ServicioController();
         $resultado = $clienteServicio->listarHistorialPago($codiServ);
 
         // Devolver resultados en formato JSON

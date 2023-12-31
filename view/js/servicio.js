@@ -1,7 +1,7 @@
 $(document).ready(function () {
   // Realizar solicitud AJAX para obtener datos de servicios
   $.ajax({
-    url: "controller/ajax/listar_servicio.php", // Ruta al script que obtiene los datos
+    url: "controller/ajax/ListarServicios.php", // Ruta al script que obtiene los datos
     type: "GET",
     dataType: "json",
     success: function (data) {
@@ -140,36 +140,7 @@ $(document).ready(function () {
   function verificarEstadoCuenta(codiServ) {
     // Realizar AJAX para llamar al método verificarEstadoCuenta con el código del servicio
     $.ajax({
-      url: "controller/ajax/verificar_estado.php",
-      type: "POST",
-      data: { codiServ: codiServ },
-      dataType: "json", // Asegúrate de especificar que esperas JSON como respuesta
-      success: function (resultado) {
-        // Manejar la respuesta según sea necesario
-        var estadoCuentaBadge = $("#estadoCuentaBadge");
-
-        if (resultado) {
-          estadoCuentaBadge
-            .text("Al día")
-            .addClass("badge-success")
-            .removeClass("badge-danger");
-        } else {
-          estadoCuentaBadge
-            .text("Pendiente")
-            .addClass("badge-danger")
-            .removeClass("badge-success");
-        }
-      },
-      error: function () {
-        alert("Error al verificar el estado de la cuenta.");
-      },
-    });
-  }
-  // Función para verificar el estado de la cuenta
-  function verificarEstadoCuenta(codiServ) {
-    // Realizar AJAX para llamar al método verificarEstadoCuenta con el código del servicio
-    $.ajax({
-      url: "controller/ajax/verificar_estado.php",
+      url: "controller/ajax/VerificarEstado.php",
       type: "POST",
       data: { codiServ: codiServ },
       dataType: "json", // Asegúrate de especificar que esperas JSON como respuesta

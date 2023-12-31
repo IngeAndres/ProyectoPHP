@@ -5,7 +5,7 @@ $(document).ready(function () {
     var codiServ = obtenerParametroUrl("codiServ");
     if (codiServ) {
       $.ajax({
-        url: "controller/ajax/listar_pagos.php?codiServ=" + codiServ,
+        url: "controller/ajax/ListarPagos.php?codiServ=" + codiServ,
         method: "GET",
         dataType: "json",
         success: function (data) {

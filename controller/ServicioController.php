@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../config/conexion.php';
 
-class servicio
+class ServicioController
 {
     private $conn;
 
@@ -12,6 +12,8 @@ class servicio
 
     public function listarServiciosPorCliente($codiClie)
     {
+        $codiClie = $this->conn->real_escape_string($codiClie);
+
         $stmt = $this->conn->prepare("CALL sp_listar_servicios(?)");
         $stmt->bind_param("s", $codiClie);
 
@@ -19,7 +21,7 @@ class servicio
         $result = $stmt->get_result();
 
         if (!$result) {
-            die("Error en la consulta: " . $this->conn->error);
+            throw new Exception("Error en la consulta: " . $this->conn->error);
         }
 
         $data = [];
@@ -34,6 +36,8 @@ class servicio
 
     public function listarHistorialPago($codiServ)
     {
+        $codiServ = $this->conn->real_escape_string($codiServ);
+
         $stmt = $this->conn->prepare("CALL sp_listar_historial_pagos(?)");
         $stmt->bind_param("s", $codiServ);
 
@@ -41,7 +45,7 @@ class servicio
         $result = $stmt->get_result();
 
         if (!$result) {
-            die("Error en la consulta: " . $this->conn->error);
+            throw new Exception("Error en la consulta: " . $this->conn->error);
         }
 
         $data = [];
@@ -56,6 +60,8 @@ class servicio
 
     public function verificarEstadoCuenta($codiServ)
     {
+        $codiServ = $this->conn->real_escape_string($codiServ);
+
         $stmt = $this->conn->prepare("CALL sp_verificar_estado_cuenta(?)");
         $stmt->bind_param("s", $codiServ);
 
@@ -63,7 +69,7 @@ class servicio
         $result = $stmt->get_result();
 
         if (!$result) {
-            die("Error en la consulta: " . $this->conn->error);
+            throw new Exception("Error en la consulta: " . $this->conn->error);
         }
 
         $rowCount = $result->num_rows;

@@ -1,7 +1,7 @@
     <?php
     require_once '../model/cambiarClave.php';
-    require_once('../controller/jwtoken.php');
-    require_once('../config/config.php');
+    require_once '../controller/jwtoken.php';
+    require_once '../config/config.php';
 
     session_start();
 
@@ -13,7 +13,7 @@
 
     $token = $_COOKIE['cliente_token'];
 
-    $jwt = new jwtoken(SECRET_KEY);
+    $jwt = new Token(SECRET_KEY);
 
     $userData = [
         'codiClie' => $_SESSION['cliente_id'],
