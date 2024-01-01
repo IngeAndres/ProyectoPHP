@@ -150,19 +150,7 @@ $(document).ready(function () {
         var cardBody = estadoCuentaCard.find(".card-body");
         var cardTitle = cardBody.find(".card-title");
 
-        if (resultado) {
-          estadoCuentaCard
-            .removeClass("border-danger")
-            .addClass("border-success");
-          cardHeader.removeClass("text-danger").addClass("text-success");
-          cardHeader.html(
-            '<i id="iconoEstado" class="fas fa-check-circle me-2"></i>Estado de cuenta al día'
-          );
-          cardTitle
-            .removeClass("text-danger")
-            .addClass("text-success")
-            .text("Estás al día en tus pagos");
-        } else {
+        if (resultado.status) {
           estadoCuentaCard
             .removeClass("border-success")
             .addClass("border-danger");
@@ -174,6 +162,18 @@ $(document).ready(function () {
             .removeClass("text-success")
             .addClass("text-danger")
             .text("No estás al día en tus pagos");
+        } else {
+          estadoCuentaCard
+            .removeClass("border-danger")
+            .addClass("border-success");
+          cardHeader.removeClass("text-danger").addClass("text-success");
+          cardHeader.html(
+            '<i id="iconoEstado" class="fas fa-check-circle me-2"></i>Estado de cuenta al día'
+          );
+          cardTitle
+            .removeClass("text-danger")
+            .addClass("text-success")
+            .text("Estás al día en tus pagos");
         }
       },
       error: function () {

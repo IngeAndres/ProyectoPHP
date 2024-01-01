@@ -72,10 +72,16 @@ class Servicio
             throw new Exception("Error en la consulta: " . $this->conn->error);
         }
 
-        $rowCount = $result->num_rows;
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
 
         $stmt->close();
 
-        return $rowCount === 0;
+        return [
+            'status' => count($data) > 0,
+            'data' => $data,
+        ];
     }
 }
