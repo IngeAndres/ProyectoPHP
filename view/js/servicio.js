@@ -1,11 +1,10 @@
 $(document).ready(function () {
   // Realizar solicitud AJAX para obtener datos de servicios
   $.ajax({
-    url: "controller/ajax/ListarServicios.php", // Ruta al script que obtiene los datos
+    url: "controller/ListarServicios.php", // Ruta al script que obtiene los datos
     type: "GET",
     dataType: "json",
     success: function (data) {
-      console.log(data);
       // Manejar los datos recibidos y mostrarlos en el contenedor
       mostrarServicios(data);
 
@@ -140,7 +139,7 @@ $(document).ready(function () {
   function verificarEstadoCuenta(codiServ) {
     // Realizar AJAX para llamar al método verificarEstadoCuenta con el código del servicio
     $.ajax({
-      url: "controller/ajax/VerificarEstado.php",
+      url: "controller/VerificarEstado.php",
       type: "POST",
       data: { codiServ: codiServ },
       dataType: "json", // Asegúrate de especificar que esperas JSON como respuesta

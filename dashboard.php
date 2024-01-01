@@ -24,15 +24,12 @@ if (isset($_POST['cerrar_sesion'])) {
 
 <head>
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
+    <meta name="description" content="">
+    <meta name="keywords" content="">
     <?php include 'view/inc/link.php'; ?>
     <?php include 'view/inc/script.php'; ?>
-
 </head>
 
 <body>
@@ -51,57 +48,27 @@ if (isset($_POST['cerrar_sesion'])) {
 
     </aside><!-- End Sidebar-->
 
+    <!-- Main Content Section -->
     <main id="main" class="main">
-
+        <!-- Estado de la cuenta Section -->
         <section class="section">
             <div class="row">
                 <div class="col-lg-12">
-                    <!-- Card and Table Section -->
-                    <div class="card">
-                        <div id="informacionServicio" class="card-body">
-                            <!-- Aquí se mostrará la información del servicio -->
+                    <!-- Card Section -->
+                    <div id="estadoCuentaCard" class="card border-primary mb-3">
+                        <div class="card-header text-primary"></div>
+                        <div class="card-body text-primary">
+                            <h5 class="card-title" id="mensajeEstado">Cargando...</h5>
                         </div>
                     </div>
-                    <!-- End Card and Table Section -->
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Comprobantes</h5>
-                            <div id="historialPagoContainer">
-                            </div>
-                        </div>
-                    </div>
-
+                    <!-- End Card Section -->
                 </div>
             </div>
         </section>
         <div>
             <?php include 'view/inc/modal.php'; ?>
         </div>
-
-    </main><!-- End #main -->
-
-    <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer">
-        <div class="copyright">
-            &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
-        </div>
-        <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-        </div>
-    </footer><!-- End Footer -->
-
+    </main>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
@@ -116,7 +83,7 @@ if (isset($_POST['cerrar_sesion'])) {
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="view/js/detalleServicio.js"></script>
+    <script src="view/js/servicio.js"></script>
     <script src="view/js/cambiarClave.js"></script>
 </body>
 

@@ -1,24 +1,5 @@
-<?php
-require_once 'controller/ClienteController.php';
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $numeDocu = $_POST['numeDocu'];
-    $passClie = hash('sha256', $_POST['passClie']);
-    $login = new ClienteController();
-
-    if ($login->iniciarSesion($numeDocu, $passClie)) {
-        $token = $_SESSION['cliente_token'];
-        setcookie('cliente_token', $token, time() + 3600, '/');
-        header("Location: principal.php");
-        exit();
-    } else {
-        echo '<script>alert("Usuario y/o contraseña incorrectos");</script>';
-    }
-}
-?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="utf-8">
@@ -38,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Google Fonts -->
     <link href="https://fonts.gstatic.com" rel="preconnect">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 
     <!-- Vendor CSS Files -->
     <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -59,38 +43,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         .container-fluid {
             height: 100vh;
             display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         .col-md-6 {
             position: relative;
             height: 100vh;
             overflow: hidden;
+            padding: 0;
         }
 
         img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
-        .contact-info {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #fff;
-            text-align: center;
-            z-index: 2;
-        }
-
-        .contact-info h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .contact-info p {
-            font-size: 16px;
-            margin: 0;
         }
 
         main {
@@ -101,44 +69,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-color: rgba(255, 255, 255, 0.9);
             padding: 20px;
         }
+
+        .card {
+            width: 100%;
+        }
+
+        .container {
+            background: linear-gradient(to right, #cc077f, #a11380, #771f81);
+            padding: 20px;
+            border-radius: 0 10px 10px 0;
+            color: #fff;
+        }
     </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 p-0">
-                <img src="assets/img/sergio-zhukov-ae__8IOF0Cs-unsplash.jpg" alt="Fondo" class="img-fluid w-100 h-100">
-                <!--<div class="contact-info">
-                    <h2>Contacto</h2>
-                    <p>Llámanos (01) 641 8000</p>
-                    <p>ventasdigitales@econocable.com</p>
-                </div>-->
-            </div>
-            <div class="col-md-6 d-flex align-items-center justify-content-center">
-                <div class="container">
+            <!-- Imagen de fondo solo visible en dispositivos medianos y grandes -->
+            <div class="col-md-6 d-none d-md-block p-0">
+                <picture>
+                    <!-- Imagen en formato WebP -->
+                    <source srcset="view/img/background-1.webp" type="image/webp">
 
+                    <!-- Alternativa en formato JPEG -->
+                    <img src="view/img/background-1.jpg" alt="Fondo" class="img-fluid w-100 h-100">
+                </picture>
+            </div>
+
+            <!-- Contenedor del formulario -->
+            <div class="col-md-6 col-12 d-flex align-items-center justify-content-center">
+                <div class="container">
                     <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                         <div class="container">
                             <div class="row justify-content-center">
-                                <div class="col-lg-8 col-md-8 d-flex flex-column align-items-center justify-content-center">
-
+                                <div class="col-lg-8 col-md-8">
                                     <div class="card mb-3">
-
                                         <div class="card-body">
-
                                             <div class="d-flex justify-content-center py-4">
-                                                <img src="assets/img/logo-econocable-1.png" alt="Logo" style="width: 300px; height: auto;">
+                                                <img src="view/img/logo-econocable-1.png" alt="Logo" style="width: 300px; height: auto;">
                                             </div><!-- End Logo -->
-
                                             <div class="pb-2">
                                                 <h5 class="card-title text-center pb-0 fs-4">Ingrese a su cuenta</h5>
-                                                <p class="text-center small">Ingrese su N° de documento y
-                                                    contraseña para
-                                                    iniciar sesión</p>
+                                                <p class="text-center small">Ingrese su N° de documento y contraseña para iniciar sesión</p>
                                             </div>
 
-                                            <form method="post" action="" class="row g-3 needs-validation" novalidate>
+                                            <!-- Formulario -->
+                                            <form class="row g-3 needs-validation" novalidate>
                                                 <div class="col-12">
                                                     <label for="numeDocu" class="form-label">N° Documento</label>
                                                     <div class="input-group has-validation">
@@ -160,39 +137,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                         <div class="invalid-feedback">Por favor ingrese su contraseña</div>
                                                     </div>
                                                 </div>
-                                                <div class="col-12">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" name="remember" value="true" id="rememberMe">
-                                                        <label class="form-check-label" for="rememberMe">Recordarme</label>
+
+                                                <div class="mt-3" id="alertError" style="display: none">
+                                                    <div class="form-control form-control-user alert alert-danger alert-sm p-2 d-flex align-items-center" role="alert">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                                                            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+                                                        </svg>
+                                                        <div class="text-center small">Credenciales incorrectas, intente nuevamente.</div>
                                                     </div>
                                                 </div>
+
                                                 <div class="col-12">
                                                     <div class="col-12">
-                                                        <button class="btn btn-primary w-100" type="submit" style="background-color: #781f82; border: 2px solid #781f82;">Iniciar
-                                                            sesión</button>
+                                                        <button id="iniciarSesion" class="btn btn-primary w-100" type="button" style="background-color: #781f82; border: 2px solid #781f82;">Iniciar sesión</button>
                                                     </div>
-
-                                                </div>
-                                                <div class="col-12">
-                                                    <p class="small mb-0">¿No tienes una cuenta? <a href="#">Crea una
-                                                            cuenta</a></p>
                                                 </div>
                                             </form>
+                                            <!-- Fin del formulario -->
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </section>
-
                 </div>
-                </main>
             </div>
-            <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
         </div>
     </div>
+
     <!-- Vendor JS Files -->
     <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -204,7 +177,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <script src="assets/vendor/php-email-form/validate.js"></script>
 
     <!-- Template Main JS File -->
-    <script src="assets/js/main.js"></script>
+    <script src="view/js/index.js"></script>
+    <script src="cryptojs/rollups/sha256.js"></script>
 </body>
 
 </html>
