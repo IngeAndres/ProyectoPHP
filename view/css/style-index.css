@@ -1,5 +1,33 @@
 body {
     margin: 0;
+    overflow: hidden;
+}
+
+#loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    /* Fondo blanco durante la carga */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 1s ease;
+    /* Transición de opacidad para mostrar suavemente */
+}
+
+#content-container {
+    opacity: 0;
+    transition: opacity 1s ease;
+    /* Transición de opacidad para mostrar suavemente */
+}
+
+.container-fluid {
+    background: linear-gradient(to right, #cc077f, #a11380, #771f81);
+    color: #fff;
 }
 
 .container-fluid {

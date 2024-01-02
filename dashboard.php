@@ -8,7 +8,7 @@ if (!isset($_SESSION['cliente_logueado'])) {
 
 if (isset($_POST['cerrar_sesion'])) {
     session_destroy();
-    setcookie('cliente_token', time() - 3600, '/');
+    setcookie('cliente_token', $token, time() - 3600, '/');
 
     if (isset($_COOKIE['PHPSESSID'])) {
         setcookie('PHPSESSID', '', time() - 3600, '/');

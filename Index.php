@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (isset($_SESSION['cliente_logueado'])) {
+    header('Location: dashboard.php');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -35,7 +44,6 @@
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
     <link href="view/css/style-index.css" rel="stylesheet">
-
     <style>
         #loadingOverlay {
             position: fixed;
@@ -55,12 +63,12 @@
         }
 
         #loadingIndicator {
-            border: 4px solid #781f82;
+            border: 8px solid #781f82;
             border-top: 8px solid transparent;
             border-radius: 50%;
             width: 40px;
             height: 40px;
-            animation: spin 0.5s linear infinite;
+            animation: spin 1s linear infinite;
         }
 
         @keyframes spin {
@@ -72,7 +80,18 @@
                 transform: rotate(360deg);
             }
         }
+
+        .fade-out {
+            opacity: 0 !important;
+            transition: opacity 0.5s ease-out;
+        }
+
+        .fade-in {
+            opacity: 1 !important;
+            transition: opacity 0.5s ease-in;
+        }
     </style>
+
 </head>
 
 <body>
@@ -85,7 +104,7 @@
     </div>
 
     <div class="container-fluid" id="mainContent" style="display: none;">
-        <div class="row">
+        <div class=" row">
             <!-- Imagen de fondo solo visible en dispositivos medianos y grandes -->
             <div class="col-md-6 d-none d-md-block p-0">
                 <picture>
@@ -180,15 +199,26 @@
     <!-- Template Main JS File -->
     <script src="view/js/index.js"></script>
     <script src="cryptojs/rollups/sha256.js"></script>
-
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(function() {
-                document.getElementById("loadingOverlay").style.display = "none";
-                document.getElementById("loadingIndicator").style.display = "none";
-                document.getElementById("loadingLogo").style.display = "none";
-                document.getElementById("mainContent").style.display = "block";
-            }, 100);
+                var loadingOverlay = document.getElementById("loadingOverlay");
+                var mainContent = document.getElementById("mainContent");
+
+                loadingOverlay.style.pointerEvents = "none";
+                loadingOverlay.classList.add("fade-out");
+
+                mainContent.style.display = "block";
+                mainContent.style.opacity = 0;
+
+                setTimeout(function() {
+                    loadingOverlay.style.display = "none";
+                    mainContent.style.opacity = 1;
+                    mainContent.classList.add("fade-in");
+
+                    mainContent.style.pointerEvents = "auto";
+                }, 250);
+            }, 250);
         });
     </script>
 </body>
