@@ -10,7 +10,7 @@ $conn = Conexion::getInstance()->getConnection();
 //Obteniendo el numero de Recibo para generar el pdf
 $codiReci = isset($_GET['codiReci']) ? $_GET['codiReci'] : null;
 
-$anulada = '';
+
 
 // Llamar al procedimiento almacenado
 $sql = "CALL sp_obtener_informacion_factura($codiReci)";
