@@ -8,7 +8,7 @@ if (!isset($_SESSION['cliente_logueado'])) {
 
 if (isset($_POST['cerrar_sesion'])) {
     session_destroy();
-    setcookie('cliente_token', $token, time() - 3600, '/');
+    setcookie('cliente_token', time() - 3600, '/');
 
     if (isset($_COOKIE['PHPSESSID'])) {
         setcookie('PHPSESSID', '', time() - 3600, '/');
@@ -25,7 +25,7 @@ if (isset($_POST['cerrar_sesion'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servicios</title>
+    <title>Dashboard</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
     <?php include 'view/inc/link.php'; ?>
@@ -50,25 +50,36 @@ if (isset($_POST['cerrar_sesion'])) {
 
     <!-- Main Content Section -->
     <main id="main" class="main">
-        <!-- Estado de la cuenta Section -->
+        <!-- Estado de la deuda Section -->
         <section class="section">
             <div class="row">
-                <div class="col-lg-12">
-                    <!-- Card Section -->
-                    <div id="estadoCuentaCard" class="card border-primary mb-3">
-                        <div class="card-header text-primary"></div>
-                        <div class="card-body text-primary">
-                            <h5 class="card-title" id="mensajeEstado">Cargando...</h5>
+                <div class="col-lg-6 mb-3">
+                    <div id="deudaCuentaCard" class="card border-primary d-flex flex-column h-100">
+                        <div class="card-header"></div>
+                        <div class="card-body text-primary flex-grow-1">
+                            <h5 class="card-title">Cargando...</h5>
+                            <p class="card-text"></p>
                         </div>
                     </div>
-                    <!-- End Card Section -->
                 </div>
+
+                <div class="col-lg-6 mb-3">
+                    <div id="estadoServicioCard" class="card border-primary d-flex flex-column h-100">
+                        <div class="card-header"></div>
+                        <div class="card-body text-primary flex-grow-1">
+                            <h5 class="card-title">Cargando...</h5>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Card Section -->
             </div>
         </section>
         <div>
             <?php include 'view/inc/modal.php'; ?>
         </div>
     </main>
+
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->

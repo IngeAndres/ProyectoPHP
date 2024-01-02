@@ -15,11 +15,17 @@ $(document).ready(function () {
           if (response.resultado === "ok") {
             window.location.href = "dashboard.php";
           } else {
+            $("#mensajeError").text(
+              "Credenciales incorrectas, intente nuevamente."
+            );
             $("#alertError").show().delay(3000).fadeOut();
           }
         },
         error: function () {
-          console.error("Error making AJAX request");
+          $("#mensajeError").text(
+            "Error interno en el servidor, intente nuevamente."
+          );
+          $("#alertError").show().delay(3000).fadeOut();
         },
       });
     } else {

@@ -57,7 +57,7 @@ if (isset($_POST['cerrar_sesion'])) {
                     <!-- Card and Table Section -->
                     <div class="card border-primary mb-3 border-info">
                         <div class="card-body">
-                            <h5 class="card-title">Listado de Servicios</h5>
+                            <h5 class="card-title">Servicios</h5>
                             <div id="serviciosContainer">
                             </div>
                         </div>

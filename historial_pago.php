@@ -116,7 +116,7 @@ if (isset($_POST['cerrar_sesion'])) {
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="view/js/detalleServicio.js"></script>
+    <script src="view/js/historialPago.js"></script>
     <script src="view/js/cambiarClave.js"></script>
 </body>
 

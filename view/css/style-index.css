@@ -1,0 +1,45 @@
+body {
+    margin: 0;
+}
+
+.container-fluid {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-md-6 {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+    padding: 0;
+}
+
+.col-md-6.d-none.d-md-block p-0,
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card {
+    width: 100%;
+}
+
+.container-fluid {
+    background: linear-gradient(to right, #cc077f, #a11380, #771f81);
+    color: #fff;
+}
+
+#alertError {
+    margin-top: 3px;
+    display: none;
+}
+
+#iniciarSesion {
+    background-color: #781f82;
+    border: 2px solid #781f82;
+    width: 100%;
+}

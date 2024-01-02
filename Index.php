@@ -34,57 +34,57 @@
 
     <!-- Template Main CSS File -->
     <link href="assets/css/style.css" rel="stylesheet">
+    <link href="view/css/style-index.css" rel="stylesheet">
 
     <style>
-        body {
-            margin: 0;
-        }
-
-        .container-fluid {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .col-md-6 {
-            position: relative;
-            height: 100vh;
-            overflow: hidden;
-            padding: 0;
-        }
-
-        img {
+        #loadingOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-        }
-
-        main {
+            background: rgba(255, 255, 255, 0.8);
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 20px;
+            z-index: 1000;
         }
 
-        .card {
-            width: 100%;
+        #loadingLogo {
+            text-align: center;
         }
 
-        .container {
-            background: linear-gradient(to right, #cc077f, #a11380, #771f81);
-            padding: 20px;
-            border-radius: 0 10px 10px 0;
-            color: #fff;
+        #loadingIndicator {
+            border: 4px solid #781f82;
+            border-top: 8px solid transparent;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 0.5s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container-fluid">
+    <!-- Antes de cargar la página -->
+    <div id="loadingOverlay">
+        <div id="loadingLogo">
+            <img src="view/img/logo-econocable-1.png" alt="Logo" style="width: 300px; height: auto;">
+        </div>
+        <div id="loadingIndicator"></div>
+    </div>
+
+    <div class="container-fluid" id="mainContent" style="display: none;">
         <div class="row">
             <!-- Imagen de fondo solo visible en dispositivos medianos y grandes -->
             <div class="col-md-6 d-none d-md-block p-0">
@@ -138,18 +138,19 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="mt-3" id="alertError" style="display: none">
+                                                <div class="mt-3" id="alertError">
                                                     <div class="form-control form-control-user alert alert-danger alert-sm p-2 d-flex align-items-center" role="alert">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
                                                             <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                                                         </svg>
-                                                        <div class="text-center small">Credenciales incorrectas, intente nuevamente.</div>
+                                                        <div id="mensajeError" class="text-center small">
+                                                        </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-12">
                                                     <div class="col-12">
-                                                        <button id="iniciarSesion" class="btn btn-primary w-100" type="button" style="background-color: #781f82; border: 2px solid #781f82;">Iniciar sesión</button>
+                                                        <button id="iniciarSesion" class="btn btn-primary w-100" type="button">Iniciar sesión</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -179,6 +180,17 @@
     <!-- Template Main JS File -->
     <script src="view/js/index.js"></script>
     <script src="cryptojs/rollups/sha256.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                document.getElementById("loadingOverlay").style.display = "none";
+                document.getElementById("loadingIndicator").style.display = "none";
+                document.getElementById("loadingLogo").style.display = "none";
+                document.getElementById("mainContent").style.display = "block";
+            }, 100);
+        });
+    </script>
 </body>
 
 </html>

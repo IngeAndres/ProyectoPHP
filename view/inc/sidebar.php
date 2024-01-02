@@ -4,7 +4,7 @@
             <i class="fas fa-home"></i>
             <span>Inicio</span>
         </a>
-        <a class="nav-link collapsed" href="principal.php">
+        <a class="nav-link collapsed" href="servicio.php">
             <i class="fas fa-briefcase"></i>
             <span>Servicios</span>
         </a>

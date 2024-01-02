@@ -57,10 +57,12 @@ $(document).ready(function () {
           formatDate(pago.fechRegiEmis) +
           "</td>" +
           '<td style="text-align: center;">' +
-          (pago.fechVenc !== null ? formatDate(pago.fechVenc) : "-") +
+          (pago.fechVenc !== null ? formatDate(pago.fechVenc) : "00/00/0000") +
           "</td>" +
           '<td style="text-align: center;">' +
-          (pago.fechRegiAlta !== null ? formatDate(pago.fechRegiAlta) : "-") +
+          (pago.fechRegiAlta !== null
+            ? formatDate(pago.fechRegiAlta)
+            : "00/00/0000") +
           "</td>" +
           '<td style="text-align: center;">' +
           "S/." +

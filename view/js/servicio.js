@@ -125,7 +125,7 @@ $(document).ready(function () {
       // Agregar evento click al botón de detalles
       $("#tablaServicios").on("click", ".btn-warning", function () {
         var codiServ = $(this).data("codiserv");
-        window.location.href = "detalle_servicio.php?codiServ=" + codiServ;
+        window.location.href = "historial_pago.php?codiServ=" + codiServ;
       });
     } else {
       // Mostrar mensaje si no hay servicios disponibles
@@ -135,46 +135,92 @@ $(document).ready(function () {
     }
   }
 
-  // Función para verificar el estado de la cuenta
+  function actualizarInterfazUsuario(
+    card,
+    statusClass,
+    headerClass,
+    icon,
+    title,
+    text
+  ) {
+    card.removeClass("border-success border-danger").addClass(statusClass);
+    card
+      .find(".card-header")
+      .removeClass("text-success text-danger")
+      .addClass(headerClass)
+      .html('<i id="iconoEstado" class="fas ' + icon + ' me-2"></i>' + title);
+    card
+      .find(".card-title")
+      .removeClass("text-success text-danger")
+      .addClass(headerClass)
+      .text(text.title);
+    card
+      .find(".card-text")
+      .removeClass("text-success text-danger")
+      .addClass(headerClass)
+      .css("white-space", "pre-line")
+      .html(text.body);
+  }
+
   function verificarEstadoCuenta(codiServ) {
-    // Realizar AJAX para llamar al método verificarEstadoCuenta con el código del servicio
     $.ajax({
       url: "controller/VerificarEstado.php",
       type: "POST",
       data: { codiServ: codiServ },
-      dataType: "json", // Asegúrate de especificar que esperas JSON como respuesta
+      dataType: "json",
       success: function (resultado) {
-        // Manejar la respuesta según sea necesario
-        var estadoCuentaCard = $("#estadoCuentaCard");
-        var cardHeader = estadoCuentaCard.find(".card-header");
-        var cardBody = estadoCuentaCard.find(".card-body");
-        var cardTitle = cardBody.find(".card-title");
+        var deudaCuentaCard = $("#deudaCuentaCard");
+        var estadoServicioCard = $("#estadoServicioCard");
 
         if (resultado.status) {
-          estadoCuentaCard
-            .removeClass("border-success")
-            .addClass("border-danger");
-          cardHeader.removeClass("text-success").addClass("text-danger");
-          cardHeader.html(
-            '<i id="iconoEstado" class="fas fa-exclamation-circle me-2"></i>Estado de cuenta pendiente'
+          actualizarInterfazUsuario(
+            deudaCuentaCard,
+            "border-danger text-danger",
+            "border-danger text-danger",
+            "fa-exclamation-circle",
+            "Estado de cuenta pendiente",
+            {
+              title: "No estás al día en tus pagos.",
+              body:
+                '<div class="deuda-actual">Deuda actual:<br>S/.' +
+                resultado.data[0].montDeud.toFixed(2) +
+                "</div>",
+            }
           );
-          cardTitle
-            .removeClass("text-success")
-            .addClass("text-danger")
-            .text("No estás al día en tus pagos");
         } else {
-          estadoCuentaCard
-            .removeClass("border-danger")
-            .addClass("border-success");
-          cardHeader.removeClass("text-danger").addClass("text-success");
-          cardHeader.html(
-            '<i id="iconoEstado" class="fas fa-check-circle me-2"></i>Estado de cuenta al día'
+          actualizarInterfazUsuario(
+            deudaCuentaCard,
+            "border-success text-success",
+            "border-danger text-danger",
+            "fa-check-circle",
+            "Estado de cuenta al día",
+            {
+              title: "Estás al día en tus pagos",
+              body: '<div class="deuda-actual">Deuda actual:<br>S/.0.00</div>',
+            }
           );
-          cardTitle
-            .removeClass("text-danger")
-            .addClass("text-success")
-            .text("Estás al día en tus pagos");
         }
+
+        var estadoText =
+          resultado.data[0].estdServ === "V" ? "ACTIVO" : "INACTIVO";
+        var estadoClass =
+          resultado.data[0].estdServ === "V"
+            ? "border-success text-success"
+            : "border-danger text-danger";
+
+        actualizarInterfazUsuario(
+          estadoServicioCard,
+          estadoClass,
+          estadoClass,
+          resultado.data[0].estdServ === "V"
+            ? "fa-check-circle"
+            : "fa-exclamation-circle",
+          "Estado del servicio",
+          {
+            title: "Estado actual:",
+            body: estadoText,
+          }
+        );
       },
       error: function () {
         alert("Error al verificar el estado de la cuenta.");
