@@ -145,11 +145,8 @@ $(document).ready(function () {
     // Agregar evento click al botón de PDF
     $("#tablaHistorialPago").on("click", ".btn-info", function () {
       var codiReci = $(this).data("codireci");
-      console.log(codiReci);
-      window.open(
-        "../factura/generaFactura.php?codiReci=" + codiReci,
-        "_blank"
-      );
+
+      window.location.href = "recibo.php?codiReci=" + codiReci;
     });
   }
 

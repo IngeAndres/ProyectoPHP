@@ -1,0 +1,89 @@
+body {
+   
+    margin: 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.invoice-details {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.invoice-details div {
+    flex: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: #fff;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.total {
+    margin-top: 20px;
+    text-align: right;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+    color: #777;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 35px; /* Ajusta el tamaño del texto principal según tus necesidades */
+}
+
+.receipt-info {
+    display: flex;
+    align-items: baseline;
+}
+
+.receipt-code {
+    font-size: 14px; /* Ajusta el tamaño del código de recibo según tus necesidades */
+    margin-right: 10px; /* Añade un espacio entre el código y el texto principal si es necesario */
+}
+
+.main-content {
+    flex-grow: 1; /* Hace que el contenido principal (texto y botón) ocupe todo el espacio disponible */
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido principal a la derecha */
+    align-items: baseline;
+}
