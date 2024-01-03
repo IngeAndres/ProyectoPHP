@@ -19,7 +19,7 @@ if (isset($_POST['cerrar_sesion'])) {
     exit;
 }
 
-//Ontención de los datos 
+//Obtención de los datos 
 
 include __DIR__ . '/config/conexion.php';
 require_once __DIR__ . '/vendor/autoload.php';
@@ -92,7 +92,7 @@ $conn->close();
                     <p>Para:</p>
                     <p style="font-weight: bold;"><?php echo $row['raznSociClie'] ?></p>
                     <p><?php echo $row['direccion'] ?></p>
-                    <p>Calular : <?php echo ($row['celuClie'] != null ? $row['celuClie'] : '-') ?></p>
+                    <p>Celular : <?php echo ($row['celuClie'] != null ? $row['celuClie'] : '-') ?></p>
                     <p>RUC/DNI : <?php echo $row['numeDocu'] ?></p>
                 </div>
             </div>
@@ -100,10 +100,10 @@ $conn->close();
             <table>
                 <thead>
                     <tr>
-                        <th>Codigo</th>
+                        <th>Código</th>
                         <th>Descripción</th>
                         <th>Cantidad</th>
-                        <th>P.U</th>
+                        <th>P. U.</th>
                         <th>DSCTO</th>
                         <th>Total</th>
                     </tr>
@@ -116,16 +116,16 @@ $conn->close();
                             <?php echo $row['nombPlan'] ?> <br>
                             <?php echo $row['nombUbig'] ?>
                         </td>
-                        <td>1.0</td>
-                        <td>S/.<?php echo $row['montReci'] ?></td>
+                        <td>1</td>
+                        <td>S/.<?php echo number_format($row['montReci'], 2) ?></td>
                         <td>0</td>
-                        <td>S/.<?php echo $row['montReci'] ?></td>
+                        <td>S/.<?php echo number_format($row['montReci'], 2) ?></td>
                     </tr>
                 </tbody>
             </table>
 
             <div class="total">
-                <p style="font-size: 18px; font-weight: bold; color: #3498db;">Importe total: S/.<?php echo $row['montReci'] ?></p>
+                <p style="font-size: 18px; font-weight: bold; color: #3498db;">Importe total: S/.<?php echo number_format($row['montReci'], 2) ?></p>
             </div>
 
             <div>
@@ -169,7 +169,7 @@ $conn->close();
         month: '2-digit',
         day: '2-digit'
     };
-    var fechaFormateada = fechaHoraActual.toLocaleDateString('es-ES', optionsFecha);
+    var fechaFormateada = fechaHoraActual.toLocaleDateString('es-PE', optionsFecha);
 
     // Formatear la hora
     var optionsHora = {
@@ -177,7 +177,7 @@ $conn->close();
         minute: '2-digit',
         hour12: true
     };
-    var horaFormateada = fechaHoraActual.toLocaleTimeString('es-ES', optionsHora);
+    var horaFormateada = fechaHoraActual.toLocaleTimeString('en-US', optionsHora);
 
     // Mostrar la fecha y hora actual en los elementos HTML correspondientes
     document.getElementById('fecha').textContent = 'Fecha: ' + fechaFormateada;

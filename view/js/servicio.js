@@ -1,11 +1,11 @@
 $(document).ready(function () {
-  // Realizar solicitud AJAX para obtener datos de servicios
+  $("#itemServicio").removeClass("collapsed");
+  $("#itemDashboard").addClass("collapsed");
   $.ajax({
-    url: "controller/ListarServicios.php", // Ruta al script que obtiene los datos
+    url: "controller/ListarServicios.php",
     type: "GET",
     dataType: "json",
     success: function (data) {
-      // Manejar los datos recibidos y mostrarlos en el contenedor
       mostrarServicios(data);
     },
     error: function (xhr, status, error) {
@@ -17,12 +17,10 @@ $(document).ready(function () {
     },
   });
 
-  // Función para mostrar los servicios en el contenedor
   function mostrarServicios(data) {
     var serviciosContainer = $("#serviciosContainer");
 
     if (data.length > 0) {
-      // Construir la tabla de servicios
       var tablaServicios =
         '<table id="tablaServicios" class="table table-hover table-bordered">' +
         "<thead>" +
@@ -37,7 +35,6 @@ $(document).ready(function () {
         "</thead>" +
         "<tbody>";
 
-      // Iterar sobre los datos y construir filas de la tabla
       data.forEach(function (servicio) {
         tablaServicios +=
           "<tr>" +
@@ -67,13 +64,10 @@ $(document).ready(function () {
           "</tr>";
       });
 
-      // Cerrar la tabla
       tablaServicios += "</tbody></table>";
 
-      // Agregar la tabla al contenedor
       serviciosContainer.html(tablaServicios);
 
-      // Inicializar el DataTable
       $("#tablaServicios").DataTable({
         language: {
           url: "./view/json/es-ES.json",
@@ -121,13 +115,11 @@ $(document).ready(function () {
         },
       });
 
-      // Agregar evento click al botón de detalles
       $("#tablaServicios").on("click", ".btn-warning", function () {
         var codiServ = $(this).data("codiserv");
         window.location.href = "historial_pago.php?codiServ=" + codiServ;
       });
     } else {
-      // Mostrar mensaje si no hay servicios disponibles
       serviciosContainer.html(
         "<p>No hay servicios disponibles para este cliente</p>"
       );
