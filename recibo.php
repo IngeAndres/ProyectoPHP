@@ -137,6 +137,9 @@ $conn->close();
                 <p>Si tiene alguna pregunta sobre este recibo, comuníquese con nosotros.</p>
             </footer>
         </div>
+        <div>
+            <?php include 'view/inc/modal.php'; ?>
+        </div>
     </main>
 
 
@@ -153,6 +156,7 @@ $conn->close();
     <script src="assets/js/main.js"></script>
     <script src="view/js/cambiarClave.js"></script>
     <script src="view/js/factura.js"></script>
+    
 </body>
 
 <script>
