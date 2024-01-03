@@ -2,7 +2,7 @@
     <a href="dashboard.php" class="logo d-flex align-items-center justify-content-center">
         <img src="view/img/logo-econocable-1.png" alt="Logo" class="img-fluid" style="max-width: 200px; max-height: 100px;">
     </a>
-    <i class="bi bi-list toggle-sidebar-btn"></i>
+    <i class="fas fa-bars toggle-sidebar-btn"></i>
 </div><!-- End Logo -->
 
 <nav class="header-nav ms-auto">
@@ -25,7 +25,7 @@
 
                 <li>
                     <a class="dropdown-item d-flex align-items-center" href="#">
-                        <i class="bi bi-person"></i>
+                        <i class="fas fa-user"></i>
                         <span>Perfil</span>
                     </a>
                 </li>
@@ -35,7 +35,7 @@
 
                 <li>
                     <a class="dropdown-item d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#myModal">
-                        <i class="bi bi-lock"></i>
+                        <i class="fas fa-lock"></i>
                         <span>Cambiar Contraseña</span>
                     </a>
                 </li>
@@ -44,15 +44,14 @@
                 </li>
 
                 <li>
-                    <form id="logoutForm" action="" method="post">
-                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="document.getElementById('logoutForm').submit();">
-                            <i class="bi bi-box-arrow-right"></i>
+                    <form id="logoutFormHeader" action="" method="post">
+                        <a class="dropdown-item d-flex align-items-center" href="#" onclick="document.getElementById('logoutFormHeader').submit();">
+                            <i class="fas fa-sign-out-alt"></i>
                             <span>Cerrar sesión</span>
                         </a>
                         <input type="hidden" name="cerrar_sesion" value="1">
                     </form>
                 </li>
-
 
             </ul><!-- End Profile Dropdown Items -->
         </li><!-- End Profile Nav -->

@@ -33,11 +33,6 @@ img {
     width: 100%;
 }
 
-.container-fluid {
-    background: linear-gradient(to right, #cc077f, #a11380, #771f81);
-    color: #fff;
-}
-
 #alertError {
     margin-top: 3px;
     display: none;
@@ -47,4 +42,50 @@ img {
     background-color: #781f82;
     border: 2px solid #781f82;
     width: 100%;
+}
+
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#loadingLogo {
+    text-align: center;
+}
+
+#loadingIndicator {
+    border: 8px solid #781f82;
+    border-top: 8px solid transparent;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.fade-out {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease-out;
+}
+
+.fade-in {
+    opacity: 1 !important;
+    transition: opacity 0.5s ease-in;
 }

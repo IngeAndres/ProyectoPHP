@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  $("#itemServicio").removeClass("collapsed");
+  $("#itemDashboard").addClass("collapsed");
   cargarHistorialPago();
 
   function cargarHistorialPago() {

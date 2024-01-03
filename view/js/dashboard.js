@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  $("#itemDashboard").removeClass("collapsed");
+  $("#itemServicio").addClass("collapsed");
   verificarEstadoCuenta(getCookie("cliente_id"));
 
   function actualizarInterfazUsuario(
