@@ -133,8 +133,8 @@ if ($decodedToken) {
                             <th>Código</th>
                             <th>Descripción</th>
                             <th>Cantidad</th>
-                            <th>P. U.</th>
-                            <th>DSCTO</th>
+                            <th>P.U</th>
+                            <th>Dscto</th>
                             <th>Total</th>
                         </tr>
                     </thead>
@@ -148,7 +148,7 @@ if ($decodedToken) {
                             </td>
                             <td>1</td>
                             <td>S/.<?php echo number_format($row['montReci'], 2) ?></td>
-                            <td>0</td>
+                            <td>S/.0.00</td>
                             <td>S/.<?php echo number_format($row['montReci'], 2) ?></td>
                         </tr>
                     </tbody>
@@ -166,6 +166,9 @@ if ($decodedToken) {
                 <footer>
                     <p>Si tiene alguna pregunta sobre este recibo, comuníquese con nosotros.</p>
                 </footer>
+            </div>
+            <div>
+                <?php include 'view/inc/modal.php'; ?>
             </div>
         </main>
 
@@ -212,7 +215,6 @@ if ($decodedToken) {
         document.getElementById('fecha').textContent = 'Fecha: ' + fechaFormateada;
         document.getElementById('hora').textContent = 'Hora: ' + horaFormateada;
     </script>
-
 
     </html>
 <?php

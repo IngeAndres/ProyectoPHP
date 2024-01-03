@@ -285,12 +285,11 @@
 						<?php echo $row['nombPlan'] ?> <br>
 						<?php echo $row['nombUbig'] ?>
 					</td>
-					<td class="textcenter">1.0</td>
-					<td class="textright">S/.<?php echo $row['montReci'] ?></td>
-					<td class="textright">0</td>
-					<td class="textright">S/.<?php echo $row['montReci'] ?></td>
+					<td class="textcenter">1</td>
+					<td class="textright">S/.<?php echo number_format($row['montReci'], 2) ?></td>
+					<td class="textright">0.00</td>
+					<td class="textright">S/.<?php echo number_format($row['montReci'], 2) ?></td>
 				</tr>
-				<!-- Puedes copiar y pegar este bloque para agregar más productos -->
 			</tbody>
 		</table>
 		<!-- Cuadro de IMPORTE TOTAL -->
@@ -298,7 +297,7 @@
 			<p><?php echo $row['montReciText'] ?> CON 00/100 SOLES</p>
 		</div>
 		<div class="importe_total_derecha">
-			<p>Importe total : S/.<?php echo $row['montReci'] ?></p>
+			<p>Importe total: S/.<?php echo number_format($row['montReci'], 2) ?></p>
 		</div>
 		<br>
 		<!-- Nuevo div con información adicional -->
