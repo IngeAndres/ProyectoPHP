@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  $("#itemServicio").removeClass("collapsed");
+  $("#itemDashboard").addClass("collapsed");
   $("#btnDescargarPDF").click(function () {
     var codiReci = $(this).data("codireci");
 

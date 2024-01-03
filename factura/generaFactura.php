@@ -6,11 +6,8 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 $conn = Conexion::getInstance()->getConnection();
 
-
 //Obteniendo el numero de Recibo para generar el pdf
 $codiReci = isset($_GET['codiReci']) ? $_GET['codiReci'] : null;
-
-
 
 // Llamar al procedimiento almacenado
 $sql = "CALL sp_obtener_informacion_factura($codiReci)";
@@ -21,14 +18,15 @@ if ($result) {
     $row = $result->fetch_assoc();
 } else {
     echo "Error al ejecutar la consulta: " . $conn->error;
+    exit; // Salir del script en caso de error
 }
 
 // Cerrar la conexión a la base de datos
 $conn->close();
 
+// Generar el PDF
 ob_start();
-include(dirname('__FILE__') . '/factura_plantilla.php');
-//require('factura_plantilla.php');
+include(dirname(__FILE__) . '/factura_plantilla.php');
 $html = ob_get_clean();
 
 use Dompdf\Dompdf;
@@ -40,10 +38,9 @@ $dompdf = new Dompdf($options);
 
 $dompdf->loadHtml($html);
 
-
 $dompdf->setPaper('letter', 'portrait');
-//$dompdf->setPaper('A4' , 'landscape');
 
 $dompdf->render();
 
 $dompdf->stream('Recibo_' . $codiReci, array('Attachment' => false));
+?>

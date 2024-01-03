@@ -162,9 +162,6 @@
 			margin-right: auto
 		}
 
-
-
-
 		.importe_total_derecha {
 			width: 30%;
 			padding: 10px;
@@ -262,7 +259,6 @@
 						</table>
 					</div>
 				</td>
-
 			</tr>
 		</table>
 
@@ -292,7 +288,6 @@
 				</tr>
 			</tbody>
 		</table>
-		<!-- Cuadro de IMPORTE TOTAL -->
 		<div class="importe_total_izquierda">
 			<p><?php echo $row['montReciText'] ?> CON 00/100 SOLES</p>
 		</div>
@@ -300,16 +295,13 @@
 			<p>Importe total: S/.<?php echo number_format($row['montReci'], 2) ?></p>
 		</div>
 		<br>
-		<!-- Nuevo div con información adicional -->
 		<div id="info_adicional">
 			<p><strong>Observaciones</strong></p>
 			<p>CUENTA CORRIENTE SOLES BCP: 000-0000000-0-00 / ECONOCABLE PERÚ</p>
 			<p>ENVIAR FOTO DEL VOUCHER AL WSP 950 078 660</p>
 			<p>EL CORTE DEL SERVICIO SE REALIZARA 10 DIAS DESPUES DE LA FECHA, PAGUE A TIEMPO</p>
 			<p><strong>El recibo número, <?php echo $row['numeReci'] ?> ha sido emitida.</strong></p>
-			<!-- Agrega más contenido según sea necesario -->
 		</div>
-
 </body>
 <script>
 	// Obtener la fecha y hora actual
