@@ -8,7 +8,7 @@ if (!isset($_SESSION['cliente_logueado'])) {
 
 if (isset($_POST['cerrar_sesion'])) {
     session_destroy();
-    setcookie('cliente_token', time() - 3600, '/');
+    setcookie('cliente_token', '', time() - 3600, '/');
 
     if (isset($_COOKIE['PHPSESSID'])) {
         setcookie('PHPSESSID', '', time() - 3600, '/');
@@ -48,13 +48,13 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recibo</title>
-	<link href="view/css/factura.css" rel="stylesheet">
-	<?php include 'view/inc/link.php'; ?>
+    <link href="view/css/factura.css" rel="stylesheet">
+    <?php include 'view/inc/link.php'; ?>
     <?php include 'view/inc/script.php'; ?>
 </head>
 
 <body>
-	<!-- ======= Header ======= -->
+    <!-- ======= Header ======= -->
     <header id="header" class="header fixed-top d-flex align-items-center">
 
         <?php include 'view/inc/header.php'; ?>
@@ -67,79 +67,79 @@ $conn->close();
         <?php include 'view/inc/sidebar.php'; ?>
 
     </aside><!-- End Sidebar-->
-	
-	<main id="main" class="main">
-	<div class="container">
 
-	<div class="title">
-		<div class="receipt-info">
-			<p class="receipt-code">Recibo: <strong><?php echo $row['numeReci'] ?></strong></p>
-		</div>
-		<p><i class="bi bi-check-circle-fill"></i><?php echo $row['raznSociClie'] ?></p>
-		<button class="btn btn-danger" id="btnDescargarPDF" data-codireci="<?php echo $codiReci; ?>">
-        <i class="bi bi-file-earmark-pdf-fill"></i> PDF</button>
-	</div>
-        <div class="invoice-details">
-            <div>
-                <p>De:</p>
-                <p style="font-weight: bold;">ECONOCABLE PERÚ</p>
-                <p>Jr. Galvez 525, Barranca 15169</p>
-                <p>Teléfono: (01) 6418000</p>
-				<p>Email: ventasdigitales@econocable.com</p>
+    <main id="main" class="main">
+        <div class="container">
+
+            <div class="title">
+                <div class="receipt-info">
+                    <p class="receipt-code">Recibo: <strong><?php echo $row['numeReci'] ?></strong></p>
+                </div>
+                <p><i class="bi bi-check-circle-fill"></i><?php echo $row['raznSociClie'] ?></p>
+                <button class="btn btn-danger" id="btnDescargarPDF" data-codireci="<?php echo $codiReci; ?>">
+                    <i class="bi bi-file-earmark-pdf-fill"></i> PDF</button>
             </div>
-            <div>
-                <p>Para:</p>
-                <p style="font-weight: bold;"><?php echo $row['raznSociClie'] ?></p>
-                <p><?php echo $row['direccion'] ?></p>
-                <p>Calular : <?php echo ($row['celuClie'] != null ? $row['celuClie'] : '-') ?></p>
-				<p>RUC/DNI : <?php echo $row['numeDocu'] ?></p>
+            <div class="invoice-details">
+                <div>
+                    <p>De:</p>
+                    <p style="font-weight: bold;">ECONOCABLE PERÚ</p>
+                    <p>Jr. Galvez 525, Barranca 15169</p>
+                    <p>Teléfono: (01) 6418000</p>
+                    <p>Email: ventasdigitales@econocable.com</p>
+                </div>
+                <div>
+                    <p>Para:</p>
+                    <p style="font-weight: bold;"><?php echo $row['raznSociClie'] ?></p>
+                    <p><?php echo $row['direccion'] ?></p>
+                    <p>Calular : <?php echo ($row['celuClie'] != null ? $row['celuClie'] : '-') ?></p>
+                    <p>RUC/DNI : <?php echo $row['numeDocu'] ?></p>
+                </div>
             </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Descripción</th>
+                        <th>Cantidad</th>
+                        <th>P.U</th>
+                        <th>DSCTO</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><?php echo $row['codiConc'] ?></td>
+                        <td>
+                            <?php echo $row['nombConc'] ?> <br>
+                            <?php echo $row['nombPlan'] ?> <br>
+                            <?php echo $row['nombUbig'] ?>
+                        </td>
+                        <td>1.0</td>
+                        <td>S/.<?php echo $row['montReci'] ?></td>
+                        <td>0</td>
+                        <td>S/.<?php echo $row['montReci'] ?></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="total">
+                <p style="font-size: 18px; font-weight: bold; color: #3498db;">Importe total: S/.<?php echo $row['montReci'] ?></p>
+            </div>
+
+            <div>
+                <p id="fecha"></p>
+                <p id="hora"></p>
+            </div>
+
+            <footer>
+                <p>Si tiene alguna pregunta sobre este recibo, comuníquese con nosotros.</p>
+            </footer>
         </div>
-
-        <table>
-            <thead>
-                <tr>
-					<th>Codigo</th>
-                    <th>Descripción</th>
-                    <th>Cantidad</th>
-					<th>P.U</th>
-                    <th>DSCTO</th>
-                    <th>Total</th>
-                </tr>
-            </thead>
-            <tbody>
-			<tr>
-				<td><?php echo $row['codiConc'] ?></td>
-					<td>
-						<?php echo $row['nombConc'] ?> <br>
-						<?php echo $row['nombPlan'] ?> <br>
-						<?php echo $row['nombUbig'] ?>
-					</td>
-					<td>1.0</td>
-					<td>S/.<?php echo $row['montReci'] ?></td>
-					<td>0</td>
-					<td>S/.<?php echo $row['montReci'] ?></td>
-				</tr>
-            </tbody>
-        </table>
-
-        <div class="total">
-            <p style="font-size: 18px; font-weight: bold; color: #3498db;">Importe total: S/.<?php echo $row['montReci'] ?></p>
-        </div>
-
-		<div >
-			<p id="fecha"></p>
-			<p id="hora"></p>
-    	</div>
-
-        <footer>
-            <p>Gracias por tu compra. ¡Vuelve pronto!</p>
-        </footer>
-    </div>
-	</main>
+    </main>
 
 
-	<script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="assets/vendor/chart.js/chart.umd.js"></script>
     <script src="assets/vendor/echarts/echarts.min.js"></script>
@@ -151,35 +151,32 @@ $conn->close();
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
     <script src="view/js/cambiarClave.js"></script>
-	<script src="view/js/factura.js"></script>
+    <script src="view/js/factura.js"></script>
 </body>
 
 <script>
+    // Obtener la fecha y hora actual
+    var fechaHoraActual = new Date();
 
+    // Formatear la fecha
+    var optionsFecha = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    };
+    var fechaFormateada = fechaHoraActual.toLocaleDateString('es-ES', optionsFecha);
 
+    // Formatear la hora
+    var optionsHora = {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    };
+    var horaFormateada = fechaHoraActual.toLocaleTimeString('es-ES', optionsHora);
 
-	// Obtener la fecha y hora actual
-	var fechaHoraActual = new Date();
-
-	// Formatear la fecha
-	var optionsFecha = {
-		year: 'numeric',
-		month: '2-digit',
-		day: '2-digit'
-	};
-	var fechaFormateada = fechaHoraActual.toLocaleDateString('es-ES', optionsFecha);
-
-	// Formatear la hora
-	var optionsHora = {
-		hour: '2-digit',
-		minute: '2-digit',
-		hour12: true
-	};
-	var horaFormateada = fechaHoraActual.toLocaleTimeString('es-ES', optionsHora);
-
-	// Mostrar la fecha y hora actual en los elementos HTML correspondientes
-	document.getElementById('fecha').textContent = 'Fecha: ' + fechaFormateada;
-	document.getElementById('hora').textContent = 'Hora: ' + horaFormateada;
+    // Mostrar la fecha y hora actual en los elementos HTML correspondientes
+    document.getElementById('fecha').textContent = 'Fecha: ' + fechaFormateada;
+    document.getElementById('hora').textContent = 'Hora: ' + horaFormateada;
 </script>
 
 

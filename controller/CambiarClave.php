@@ -6,8 +6,8 @@
     session_start();
 
     if (!isset($_COOKIE['cliente_token'])) {
-        http_response_code(401);
-        echo json_encode(array("message" => "Cookie de autorización no encontrada."));
+        header('Location: ../index.php');
+        session_destroy();
         exit;
     }
 
@@ -23,17 +23,17 @@
     $decodedToken = $jwt->verificarToken($token, $userData);
 
     if ($decodedToken) {
-        // Obtener datos del POST
+        $codiClie = $_SESSION['cliente_id'];
         $nuevaClave = $_POST['nuevaClave'];
         $claveActual = $_POST['claveActual'];
 
         $cambiarClaveObj = new Cliente();
 
-        $resultado =  $cambiarClaveObj->cambiarClave($_SESSION['cliente_id'], $nuevaClave, $claveActual);
+        $resultado =  $cambiarClaveObj->cambiarClave($codiClie, $nuevaClave, $claveActual);
 
         echo json_encode(["resultado" => $resultado]);
     } else {
-        http_response_code(401);
-        echo json_encode(array("message" => "Token de autorización inválido."));
+        header('Location: ../index.php');
+        session_destroy();
         exit;
     }

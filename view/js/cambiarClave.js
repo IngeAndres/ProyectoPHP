@@ -4,13 +4,11 @@ $(document).ready(function () {
     let claveNueva = $("#txtClaveNueva").val().trim();
     let repetirClaveNueva = $("#txtRepetirClaveNueva").val().trim();
 
-    // Validar campos vacíos
     if (camposVacios([claveActual, claveNueva, repetirClaveNueva])) {
       mensaje("Por favor, complete todos los campos");
       return;
     }
 
-    // Validar contraseñas
     if (claveActual === claveNueva) {
       mensaje("La contraseña nueva es igual a la actual");
     } else if (claveNueva !== repetirClaveNueva) {
@@ -36,8 +34,9 @@ function cambiarClave(claveActual, claveNueva) {
         mensaje("Contraseña Actual incorrecta");
       } else {
         mensaje("Contraseña cambiada exitosamente");
-        //$("#myModal").modal("toggle");
+        $("#myModal").modal("toggle");
         limpiarCampos();
+        window.location.href = "index.php";
       }
     },
     error: function (error) {

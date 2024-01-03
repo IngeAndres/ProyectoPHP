@@ -18,7 +18,7 @@ class Token
         try {
             $issuedAtClaim = time();
             $notBeforeClaim = $issuedAtClaim;
-            $expireClaim = $issuedAtClaim + 3600;
+            $expireClaim = $issuedAtClaim + (2 * 60);
 
             $token = [
                 "iat" => $issuedAtClaim,

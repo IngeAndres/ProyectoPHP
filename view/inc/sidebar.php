@@ -8,5 +8,15 @@
             <i class="fas fa-briefcase"></i>
             <span>Servicios</span>
         </a>
+    <li>
+        <form id="logoutForm" action="" method="post">
+            <a class="nav-link collapsed" href="#" onclick="document.getElementById('logoutForm').submit();">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Salir</span>
+            </a>
+            <input type="hidden" name="cerrar_sesion" value="1">
+        </form>
+    </li>
+
     </li><!-- End Dashboard Nav -->
 </ul>

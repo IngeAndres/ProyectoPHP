@@ -8,7 +8,7 @@ if (!isset($_SESSION['cliente_logueado'])) {
 
 if (isset($_POST['cerrar_sesion'])) {
     session_destroy();
-    setcookie('cliente_token', $token, time() - 3600, '/');
+    setcookie('cliente_token', '', time() - 3600, '/');
 
     if (isset($_COOKIE['PHPSESSID'])) {
         setcookie('PHPSESSID', '', time() - 3600, '/');
@@ -58,7 +58,11 @@ if (isset($_POST['cerrar_sesion'])) {
                         <div class="card-header"></div>
                         <div class="card-body text-primary flex-grow-1">
                             <h5 class="card-title">Cargando...</h5>
-                            <p class="card-text"></p>
+                            <div id="enlaceDeudas" class="d-flex justify-content-end align-items-center">
+                                <a href="#" id="deudasLink" class="btn btn-link text-primary">
+                                    Ver deudas <i class=" fas fa-arrow-right ml-2"></i>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -68,7 +72,6 @@ if (isset($_POST['cerrar_sesion'])) {
                         <div class="card-header"></div>
                         <div class="card-body text-primary flex-grow-1">
                             <h5 class="card-title">Cargando...</h5>
-                            <p class="card-text"></p>
                         </div>
                     </div>
                 </div>
@@ -94,7 +97,7 @@ if (isset($_POST['cerrar_sesion'])) {
 
     <!-- Template Main JS File -->
     <script src="assets/js/main.js"></script>
-    <script src="view/js/servicio.js"></script>
+    <script src="view/js/dashboard.js"></script>
     <script src="view/js/cambiarClave.js"></script>
 </body>
 

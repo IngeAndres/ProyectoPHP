@@ -58,12 +58,12 @@ class Servicio
         return $data;
     }
 
-    public function verificarEstadoCuenta($codiServ)
+    public function verificarEstadoCuenta($codiClie)
     {
-        $codiServ = $this->conn->real_escape_string($codiServ);
+        $codiClie = $this->conn->real_escape_string($codiClie);
 
         $stmt = $this->conn->prepare("CALL sp_verificar_estado_cuenta(?)");
-        $stmt->bind_param("s", $codiServ);
+        $stmt->bind_param("s", $codiClie);
 
         $stmt->execute();
         $result = $stmt->get_result();
@@ -85,4 +85,27 @@ class Servicio
         ];
     }
 
+    public function listarDeudas($codiServ)
+    {
+        $codiServ = $this->conn->real_escape_string($codiServ);
+
+        $stmt = $this->conn->prepare("CALL sp_listar_deuda_actual(?)");
+        $stmt->bind_param("s", $codiServ);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if (!$result) {
+            throw new Exception("Error en la consulta: " . $this->conn->error);
+        }
+
+        $data = [];
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+
+        $stmt->close();
+
+        return $data;
+    }
 }

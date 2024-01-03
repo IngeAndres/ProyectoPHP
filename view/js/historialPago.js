@@ -22,11 +22,10 @@ $(document).ready(function () {
     var historialPagoContainer = $("#historialPagoContainer");
 
     if (data.length > 0) {
-      // Construir la tabla de historial de pago
       var tablaHistorialPago =
         '<table id="tablaHistorialPago" class="table table-hover table-bordered">' +
         "<thead>" +
-        "<tr class='table table-primary'>" +
+        "<tr class='table table-success'>" +
         '<th style="text-align: center;">Código</th>' +
         '<th style="text-align: center;">N° Recibo</th>' +
         '<th style="text-align: center;">Concepto</th>' +
@@ -35,12 +34,11 @@ $(document).ready(function () {
         '<th style="text-align: center;">Pagado</th>' +
         '<th style="text-align: center;">Monto</th>' +
         '<th style="text-align: center;">Estado</th>' +
-        '<th style="text-align: center;">Boleta</th>' +
+        '<th style="text-align: center;">Recibo</th>' +
         "</tr>" +
         "</thead>" +
         "<tbody>";
 
-      // Iterar sobre los datos y construir filas de la tabla
       data.forEach(function (pago) {
         tablaHistorialPago +=
           "<tr>" +
@@ -79,13 +77,10 @@ $(document).ready(function () {
           "</tr>";
       });
 
-      // Cerrar la tabla
       tablaHistorialPago += "</tbody></table>";
 
-      // Agregar la tabla al contenedor
       historialPagoContainer.html(tablaHistorialPago);
 
-      // Volver a inicializar la tabla con los nuevos datos
       $("#tablaHistorialPago").DataTable({
         language: {
           url: "./view/json/es-ES.json",
@@ -133,16 +128,13 @@ $(document).ready(function () {
         },
       });
 
-      // Mostrar la información del servicio
       mostrarInformacionServicio(data);
     } else {
-      // Mostrar mensaje si no hay historial de pago disponible
       historialPagoContainer.html(
         "<p>No hay historial de pago disponible para este servicio</p>"
       );
     }
 
-    // Agregar evento click al botón de PDF
     $("#tablaHistorialPago").on("click", ".btn-info", function () {
       var codiReci = $(this).data("codireci");
 
@@ -169,14 +161,11 @@ $(document).ready(function () {
   }
 
   function mostrarInformacionServicio(data) {
-    // Limpiar el contenido actual del contenedor
     $("#informacionServicio").empty();
 
-    // Verificar si hay datos disponibles
     if (data && data.length > 0) {
       var servicio = data[0];
 
-      // Construir y agregar la información del servicio al contenedor
       var informacionHTML =
         "<h5 class='card-title'>Detalles del servicio:</h5>" +
         "<p><strong>Código:</strong> " +
