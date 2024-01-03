@@ -9,8 +9,8 @@
             <span>Servicios</span>
         </a>
     <li>
-        <form id="logoutForm" action="" method="post">
-            <a class="nav-link collapsed" href="#" onclick="document.getElementById('logoutForm').submit();">
+        <form id="logoutForm2" action="" method="post">
+            <a class="nav-link collapsed" href="#" onclick="document.getElementById('logoutForm2').submit();">
                 <i class="fas fa-sign-out-alt"></i>
                 <span>Salir</span>
             </a>

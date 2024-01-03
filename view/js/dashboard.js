@@ -29,7 +29,12 @@ $(document).ready(function () {
       type: "POST",
       data: { codiServ: codiServ },
       dataType: "json",
-      success: function (resultado) {
+      success: function (resultado, xhr) {
+        if (xhr.status === 401) {
+          window.location.href = "index.php";
+          return;
+        }
+
         var deudaCuentaCard = $("#deudaCuentaCard");
         var estadoServicioCard = $("#estadoServicioCard");
 
@@ -84,8 +89,12 @@ $(document).ready(function () {
           }
         );
       },
-      error: function () {
-        alert("Error al verificar el estado de la cuenta.");
+      error: function (xhr, status, error) {
+        if (xhr.status == 401) {
+          window.location.replace("index.php");
+        } else {
+          console.error("Error al verificar el estado de la cuenta:", error);
+        }
       },
     });
   }

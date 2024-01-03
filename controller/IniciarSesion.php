@@ -9,8 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($cliente->iniciarSesion($numeDocu, $passClie)) {
         $token = $_SESSION['cliente_token'];
-        setcookie('cliente_id', $_SESSION['cliente_id'], time() + 3600, '/');
-        setcookie('cliente_token', $token, time() + 3600, '/');
+        setcookie('cliente_id', $_SESSION['cliente_id'], time() + 900, '/');
+        setcookie('cliente_token', $token, time() + 900, '/');
         echo json_encode(["resultado" => "ok"]);
     } else {
         echo json_encode(["resultado" => "error"]);

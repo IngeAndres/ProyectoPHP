@@ -11,8 +11,12 @@ $(document).ready(function () {
         success: function (data) {
           mostrarDatosHistorialPago(data);
         },
-        error: function (error) {
-          console.error("Error al cargar historial de pago:", error);
+        error: function (xhr, status, error) {
+          if (xhr.status == 401) {
+            window.location.replace("index.php");
+          } else {
+            console.error("Error al obtener el historial de pago:", error);
+          }
         },
       });
     }

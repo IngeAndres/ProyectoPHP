@@ -6,7 +6,8 @@
     session_start();
 
     if (!isset($_COOKIE['cliente_token'])) {
-        header('Location: ../index.php');
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
         session_destroy();
         exit;
     }
@@ -32,8 +33,16 @@
         $resultado =  $cambiarClaveObj->cambiarClave($codiClie, $nuevaClave, $claveActual);
 
         echo json_encode(["resultado" => $resultado]);
+        session_destroy();
+        setcookie('cliente_id', '', time() - 3600, '/');
+        setcookie('cliente_token', '', time() - 3600, '/');
+
+        if (isset($_COOKIE['PHPSESSID'])) {
+            setcookie('PHPSESSID', '', time() - 3600, '/');
+        }
     } else {
-        header('Location: ../index.php');
+        http_response_code(401);
+        echo json_encode(['error' => 'Unauthorized']);
         session_destroy();
         exit;
     }

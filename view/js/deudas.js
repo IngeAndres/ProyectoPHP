@@ -8,11 +8,18 @@ $(document).ready(function () {
         url: "controller/ListarDeudas.php?codiServ=" + codiServ,
         method: "GET",
         dataType: "json",
-        success: function (data) {
+        success: function (data, xhr) {
+          if (xhr.status === 401) {
+            window.location.href = "index.php";
+          }
           mostrarDeudas(data);
         },
-        error: function (error) {
-          console.error("Error al cargar las deudas:", error);
+        error: function (xhr, status, error) {
+          if (xhr.status == 401) {
+            window.location.replace("index.php");
+          } else {
+            console.error("Error al obtener los datos de las deudas:", error);
+          }
         },
       });
     }

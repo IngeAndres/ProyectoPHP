@@ -8,8 +8,12 @@ $(document).ready(function () {
       // Manejar los datos recibidos y mostrarlos en el contenedor
       mostrarServicios(data);
     },
-    error: function () {
-      alert("Error al obtener los datos de los servicios.");
+    error: function (xhr, status, error) {
+      if (xhr.status == 401) {
+        window.location.replace("index.php");
+      } else {
+        console.error("Error al obtener los datos de los servicios: ", error);
+      }
     },
   });
 

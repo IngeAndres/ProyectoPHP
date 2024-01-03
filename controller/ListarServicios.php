@@ -6,7 +6,8 @@ require_once '../jwt/Token.php';
 session_start();
 
 if (!isset($_COOKIE['cliente_token'])) {
-    header('Location: ../index.php');
+    http_response_code(401);
+    echo json_encode(['error' => 'Unauthorized']);
     session_destroy();
     exit;
 }
@@ -29,7 +30,8 @@ if ($decodedToken) {
     header('Content-Type: application/json');
     echo json_encode($resultado);
 } else {
-    header('Location: ../index.php');
+    http_response_code(401);
+    echo json_encode(['error' => 'Unauthorized']);
     session_destroy();
     exit;
 }

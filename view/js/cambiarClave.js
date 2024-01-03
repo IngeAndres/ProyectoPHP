@@ -33,14 +33,17 @@ function cambiarClave(claveActual, claveNueva) {
       if (response.resultado === false) {
         mensaje("Contraseña Actual incorrecta");
       } else {
-        mensaje("Contraseña cambiada exitosamente");
-        $("#myModal").modal("toggle");
         limpiarCampos();
-        window.location.href = "index.php";
+        $("#myModal").modal("toggle");
+        window.location.replace("index.php");
       }
     },
-    error: function (error) {
-      console.error(error);
+    error: function (xhr, status, error) {
+      if (xhr.status == 401) {
+        window.location.replace("index.php");
+      } else {
+        console.error("Error al cambiar la contraseña:", error);
+      }
     },
   });
 }
