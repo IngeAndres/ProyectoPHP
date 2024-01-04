@@ -108,7 +108,7 @@ if ($decodedToken) {
                     </div>
                     <p><i class="bi bi-check-circle-fill"></i><?php echo $row['raznSociClie'] ?></p>
                     <button class="btn btn-danger" id="btnDescargarPDF" data-codireci="<?php echo $codiReci; ?>">
-                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF</button>
+                    <i class="fas fa-file-pdf"></i> PDF</button>
                 </div>
                 <div class="invoice-details">
                     <div>
